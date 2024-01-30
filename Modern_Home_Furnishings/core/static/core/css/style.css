@@ -10,6 +10,13 @@ nav {
     background-color: rgb(33, 59, 59);
     height: 80px;
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    position: fixed;
+    top: 0;
+    z-index: 1;
 }
 
 label.logo{
@@ -21,28 +28,60 @@ label.logo{
 }
 
 nav ul {
-    float: right;
-    margin-right: 40px;
+    width: 55%;
+    display: flex;
+    justify-content: right;
 }
 
 nav ul li{
-    display: inline-block;
-    line-height: 80px;
-    margin: 0 10px;
+    margin-left: 20px;
+    
 }
 
 nav ul li a {
   color: white;
   font-size: 17px;
   padding: 7px 13px;
-  border-radius: 3;
+  text-decoration: none;
+
 }
 
 a.active,a:hover {
     background-color: rgb(28, 47, 40);
     transition: .5s;
+    text-decoration: none;
+   
 }
 
-.search-icon {
-    line-height: 30px;
-    }
+.search {
+    display: flex;
+    align-items: center;
+    margin-right: 0px;
+}
+
+.search form {
+    display: flex;
+    margin: 0px;
+}
+
+.search input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    outline: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.search button {
+    padding: 5px;
+    background-color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 19px;
+    cursor: pointer;
+}
+
+.search button:hover {
+    background-color:#ccc;
+}
