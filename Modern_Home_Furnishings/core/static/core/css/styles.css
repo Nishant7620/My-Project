@@ -92,4 +92,7 @@ a.active,a:hover {
    
 }
 
-
+.carouselExampleCaptions img {
+    height: 400px;
+    width: auto;
+}
