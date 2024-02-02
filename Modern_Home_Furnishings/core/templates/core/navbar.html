@@ -1,30 +1,44 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nabvar</title>
+    <title>Navbar</title>
 </head>
 <body>
-    <nav>
-    <label class="logo">Furniture</label>
-    
-    <ul>
-        <li><a href="#" class="active">Home</a></li>
-        <li><a href="#">Products</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contact</a></li>
-    </ul>
-    <div class="search">
-        <form action="#">
-            <input type="text" placeholder="Products...">
-            <button type="submit">Search</button>
-        </form>
-    </div>
-    </nav>
-    <!--Carousel-->
-    
-
-    <!--Carsousel End-->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #1B4242;">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#" style="margin-left: 10px;">Logo</a>
+          <a class="navbar-brand" href="#" style="margin-left: 40px;">Furniture</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form class="d-flex" role="search" style="margin-left: 350px;">
+                <input class="form-control me-2" type="search" placeholder="Products.." aria-label="Search" style="width:400px  ">
+                <button class="btn btn-outline-success" type="submit" style="margin-left:8px">Search</button>
+              </form>
+            <ul class="navbar-nav ml-auto mb-2 mb-lg-0" style="padding: 10px; margin-right:40px">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Products</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Cart</a>
+              </li>
+            </ul>
+            
+          </div>
+        </div>
+      </nav>
 </body>
 </html>
