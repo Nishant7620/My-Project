@@ -52,3 +52,11 @@
     align-items: center;
     justify-content: center;
 }
+
+/* ------*/
+.d-block.mx-lg-auto.img-fluid {
+    width: 70%;
+    height: 50%;
+    
+    padding: 20px;
+}
