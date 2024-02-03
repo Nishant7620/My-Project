@@ -54,8 +54,14 @@
 }
 
 /* ------*/
-.information_heading_text {
+.info_heading_text h3{
+    
+    margin-top: 50px;
+    text-align: center;
+}
 
+.row.flex-lg-row-reverse.align-items-center.g-5.py-5 {
+    background-color: aqua;
 }
 
 .d-block.mx-lg-auto.img-fluid {
