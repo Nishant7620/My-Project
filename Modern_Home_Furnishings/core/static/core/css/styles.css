@@ -61,7 +61,7 @@
 }
 
 .row.flex-lg-row-reverse.align-items-center.g-5.py-5 {
-    background-color: aqua;
+    background-color:white;
 }
 
 .d-block.mx-lg-auto.img-fluid {
@@ -69,4 +69,8 @@
     height: 50%;
     
     padding: 20px;
+}
+
+.bd-placeholder-img.bd-placeholder-img-lg.featurette-image.img-fluid.mx-auto{
+    margin-right: 20px;
 }
