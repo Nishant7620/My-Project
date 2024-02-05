@@ -8,3 +8,6 @@ def test(request):
 
 def contact(request):    
     return render(request,'core/contact_us.html')
+
+def about(request):    
+    return render(request,'core/about.html')    

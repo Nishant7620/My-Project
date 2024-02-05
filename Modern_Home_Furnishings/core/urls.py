@@ -3,5 +3,6 @@ from core import views
 
 urlpatterns = [
     path('core/',views.test),
-    path('us/',views.contact)
+    path('us/',views.contact),
+    path('a/',views.about),
 ]
