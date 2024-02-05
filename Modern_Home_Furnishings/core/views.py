@@ -4,3 +4,7 @@ from django.shortcuts import render
 
 def test(request):
     return render(request,'core/base.html')
+    
+
+def contact(request):    
+    return render(request,'core/contact_us.html')
