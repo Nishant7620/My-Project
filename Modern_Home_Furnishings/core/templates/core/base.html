@@ -11,9 +11,10 @@
 
 </head>
 <body>
+    <header>
    {% include "core/navbar.html" %}
-   {% include "core/Carousel.html" %}
-   
+    </header>
+   {% block home %}{% endblock home %}
 
 
     <script src="{% static 'core/js/bootstrap.min.js' %}"></script>  

@@ -11,3 +11,6 @@ def contact(request):
 
 def about(request):    
     return render(request,'core/about.html')    
+
+def Home(request):    
+    return render(request,'core/home.html')        
