@@ -34,7 +34,6 @@
     background-color: #43766C;
     padding: 35px;
     padding-top: 40px;
-    margin-top: ;
     text-align: center;
 }
 
@@ -91,4 +90,29 @@
 
 .new h1 p{ 
     margin-right: 20px;
+}
+
+/*----sofas card--------- */
+
+
+.sofas_cards {
+    display: flex;
+    align-items: center ;
+    justify-content:space-evenly;
+    padding: 20px;
+    padding-top: 200px;
+    background-color: #BBE2EC;
+    background-image: url('core/images/chair.jpg');
+}
+
+/*----bed card--------- */
+
+.bed_cards {
+    display: flex;
+    align-items: center ;
+    justify-content:space-evenly;
+    padding: 20px;
+    padding-top: 200px;
+    background-color: #BBE2EC;
+    background-image: url('core/images/chair.jpg');
 }

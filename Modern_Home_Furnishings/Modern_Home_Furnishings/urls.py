@@ -23,5 +23,7 @@ urlpatterns = [
     path('contact/',include('core.urls')),
     path('about/',include('core.urls')),
     path('home/',include('core.urls')),
+    path('sofas/',include('core.urls')),
+    path('beds/',include('core.urls')),
 ]
 
