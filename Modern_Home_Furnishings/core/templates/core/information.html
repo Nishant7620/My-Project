@@ -20,7 +20,7 @@
   
   <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
       <div class="col-10 col-sm-8 col-lg-6">
-        <img src="{% static 'core/images/hanging.jpg' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+        <img src="{% static 'core/images/hanging.jpg' %}" class="d-block mx-lg-auto img-fluid"style="mix-blend-mode:color-burn;" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
       </div>
       <div class="col-lg-6" style="text-align: right;">
         <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3" >Responsive left-aligned hero with  </h1>
@@ -30,7 +30,7 @@
     </div>
      <!--information end-->
      <!--information 2-->
-     <hr class="featurette-divider">
+     {% comment %} <hr class="featurette-divider"> {% endcomment %}
      <div class="row featurette">
       <div class="col-md-7 order-md-2" style="margin-left: 0px;">
         <h2 class="featurette-heading fw-normal lh-1" style="text-align: left; margin-top: 100px; padding:10px ;" >Oh yeah, it’s that good. <span class="text-body-secondary">See for yourself.</span></h2>
@@ -40,17 +40,17 @@
         <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" style="padding: 25px; " width="500" height="500" src="{% static 'core/images/chair.jpg' %}" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-bg)"></rect>
       </div>
     </div>
-    <hr class="featurette-divider">
+    {% comment %} <hr class="featurette-divider"> {% endcomment %}
     <!--information 2 end-->
     
     <!--information 3-->
-    <div class="row featurette">
+    <div class="row featurette" style="background-color: #EEF5FF;">
       <div class="col-md-7">
         <h2 class="featurette-heading fw-normal lh-1" style="text-align: right; padding: 10px; margin-right: 100px;margin-top: 100px;">And lastly, this one. <span class="text-body-secondary">Checkmate.</span></h2>
         <p class="lead" style="text-align: right; padding: 10px; margin-right: 100px;">And yes, this is the last block of representative placeholder content. Again, not really intended to be actually read, simply here to give you a better view of what this would look like with some actual content. Your content.</p>
       </div>
       <div class="col-md-5">
-        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"style="margin-top:20px"  width="460" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-bg)"></rect><text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">500x500</text></svg>
+        <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"style="margin-top:20px"  width="460" height="400" src="{% static "core/images/front_sofa.png" %} " role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-bg)"></rect>
       </div>
     </div>
 </body>
