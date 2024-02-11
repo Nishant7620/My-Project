@@ -1,4 +1,4 @@
-/*  navbar csss    */
+/*  navbar css    */
 .nav-item {
     font-size: 18px;
     
@@ -13,16 +13,17 @@
 }
 /* ---------------------------------------------------------------------------------------*/
 /* Carousel css */
-.btn.btn-secondary.btn-lg {
+.know_more_btn {
     background-color: rgb(169, 164, 164);
     border: 2px solid black;
     border-radius: 25px;
     color: black;
 }
 
-.btn.btn-secondary.btn-lg:hover {
+.know_more_btn:hover {
     color: aliceblue;
     background-color: rgb(31, 29, 29);
+    border: 2px solid black;
     width: 200px;
     transition: .8s;
 }
@@ -37,7 +38,7 @@
     text-align: center;
 }
 
-.cards {
+.home_cards {
     background-color: #DCF2F1;
     padding: 20px;
     padding-bottom: 60px;
@@ -52,46 +53,96 @@
     object-fit:fill;
 } 
 
-.btn.btn-primary {
+.buy_btn {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* ------*/
+/* information_1*/
 .info_heading_text h3{
     background-color: #EBF3E8;
     padding: 30px;
     text-align: center;
 }
 
-.row.flex-lg-row-reverse.align-items-center.g-5.py-5 {
+.div_1_info {
     background-color:#EBF3E8;
     margin-top: 0px;
     
 }
 
-.d-block.mx-lg-auto.img-fluid {
+.hanging_img {
     width: 500px;
     height: 500px;
-    
     padding: 20px;
 }
 
-.display-5.fw-bold.text-body-emphasis.lh-1.mb-3{
+.div_1_info_heading_text{
     margin-left: 20px;
     
 }
 
-.lead {
+.div_1_info_para_text {
     margin-left: 20px;
     float: right;
 }
 
-.new h1 p{ 
+/* .new h1 p{ 
     margin-right: 20px;
+} */
+
+/* information_1 end*/
+
+
+
+/* information_2 start*/
+.div_2_info_heading_text {
+    text-align: left; 
+    margin-top: 100px; 
+    padding:10px;
 }
 
+.div_2_info_para_text {
+    text-align: left; 
+    padding: 10px;
+}
+
+.chair_img {
+    padding: 25px; 
+    width:500px; 
+    height:500px
+}
+/* information_2 end*/
+
+
+
+/* information_3 start*/
+.div_3_info_heading_text {
+    text-align: right; 
+    padding: 10px; 
+    margin-right: 100px;
+    margin-top: 100px; 
+}
+
+.div_3_info_para_text {
+    text-align: right; 
+    padding: 10px; 
+    margin-right: 100px;
+}
+
+.sofa_img {
+    margin-top:20px;
+    width:460px; 
+    height:400px;
+    transform: scale(1);
+    transition: transform 0.3s;   
+}
+
+.sofa_img:hover {
+    transform: scale(1.2);
+} 
+/* information_3 end */
 /*----sofas card--------- */
 
 
@@ -131,3 +182,21 @@
     background-color: #BBE2EC;
     background-image: url('core/images/chair.jpg');
 }
+
+.new_class {
+   
+}
+
+.new_class:hover {
+    
+}
+
+.hanging_img {
+    transform: scale(1);
+    transition: transform 0.3s;
+}
+
+.hanging_img:hover {
+    transform: scale(1.1);
+} 
+
