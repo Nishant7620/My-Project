@@ -24,13 +24,23 @@
               </form>
             <ul class="navbar-nav ml-auto mb-2 mb-lg-0" style="padding: 10px; margin-right:40px">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link active" aria-current="page" href="{% url "home" %}">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Products</a>
+                {% comment %} <a class="nav-link" href="#">Products</a> {% endcomment %}
+                <div class="dropdown">
+                  <button class="btn btn-link dropdown-toggle product_btn" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Products
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{% url "sofa" %}" style="color: black;">Sofas</a>
+                    <a class="dropdown-item" href="{% url "bed" %}" style="color: black;" >Beds</a>
+                    <a class="dropdown-item" href="#"style="color: black;">Something else here</a>
+                  </div>
+                </div>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="about/">About</a>
+                <a class="nav-link" href="{% url "x" %}">About</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="contact_us/">Contact</a>
