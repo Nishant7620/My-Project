@@ -1,6 +1,71 @@
 from django.db import models
+from django.contrib.auth.models import User
 # Create your models here.
 
 
+class Customer(models.Model):
 
+    STATE_CHOICES = [
+        ('AP', 'Andhra Pradesh'),
+        ('AR', 'Arunachal Pradesh'),
+        ('AS', 'Assam'),
+        ('BR', 'Bihar'),
+        ('CT', 'Chhattisgarh'),
+        ('GA', 'Goa'),
+        ('GJ', 'Gujarat'),
+        ('HR', 'Haryana'),
+        ('HP', 'Himachal Pradesh'),
+        ('JH', 'Jharkhand'),
+        ('KA', 'Karnataka'),
+        ('KL', 'Kerala'),
+        ('MP', 'Madhya Pradesh'),
+        ('MH', 'Maharashtra'),
+        ('MN', 'Manipur'),
+        ('ML', 'Meghalaya'),
+        ('MZ', 'Mizoram'),
+        ('NL', 'Nagaland'),
+        ('OR', 'Odisha'),
+        ('PB', 'Punjab'),
+        ('RJ', 'Rajasthan'),
+        ('SK', 'Sikkim'),
+    ]
 
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  # we have created Many-to-one relationship i.e multiple order can be done by one user
+    name = models.CharField(max_length=100)
+    address = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=2, choices=STATE_CHOICES)
+    pincode = models.IntegerField(
+    default= 0,
+    blank= True,
+    null= True
+    )
+
+    def __str__(self):
+        return str(self.id)
+
+class Products(models.Model):
+
+    CATAGORY_CHOICES = [
+        ('SOFA','Sofa'),
+        ('BED','Bed'),
+    ]
+
+    name = models.CharField(max_length=100)
+    category = models.CharField(max_length=20,choices=CATAGORY_CHOICES)
+    small_description = models.TextField()
+    description = models.TextField()
+    selling_price = models.IntegerField()
+    pet_image = models.ImageField(upload_to = 'pet_images')   # As we are using image field we have to intall 'pillow'. And we have to Define MEDIA_URL in settings.py file so that all folder should save in media directory
+
+    def __str__(self):
+        return str(self.id)
+
+class Cart(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Products,on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)           # Quantity cannot be negative so we have used PositiveIntegerField
+
+    def __str__(self):
+        return str(self.id)
+        
