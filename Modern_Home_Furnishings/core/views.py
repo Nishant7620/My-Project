@@ -38,3 +38,13 @@ class Beds(View):
     def get(self,request):
         Bed_category = Products.objects.filter(category = 'BED')
         return render(request,'core/beds.html',{'Bed_category':Bed_category})
+
+
+# class base view of Product Details
+
+
+class ProductDetail(View):
+    def get(self,request,id):
+        product_detail = Products.objects.get(pk=id)
+
+        return render(request,'core/product_details.html',{'pd':product_detail})
