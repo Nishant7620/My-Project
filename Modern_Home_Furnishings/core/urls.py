@@ -9,3 +9,7 @@ urlpatterns = [
     path('s/',views.sofas,name='sofa'),
     path('b/',views.beds,name='bed'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+    
