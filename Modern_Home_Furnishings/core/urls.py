@@ -10,7 +10,7 @@ urlpatterns = [
     path('h/about/',views.about,name='x'),
     path('',views.Home.as_view(),name='home'),
     path('sofa_categories',views.Sofas.as_view(),name='sofacategories'),
-    path('b/',views.beds,name='bed'),
+    path('bed_categories',views.Beds.as_view(),name='bedcategories'),
 ]
 
 if settings.DEBUG:

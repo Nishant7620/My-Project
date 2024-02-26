@@ -30,5 +30,11 @@ class Sofas(View):
         sofa_category = Products.objects.filter(category = 'SOFA')    # we are using filter function of queryset, that will filter those data whose category belongs to Sofa
         return render(request,'core/sofas.html',{'sofa_category':sofa_category})
 
-def beds(request):    
-    return render(request,'core/beds.html')            
+
+
+# class base view of Beds Categories
+
+class Beds(View):
+    def get(self,request):
+        Bed_category = Products.objects.filter(category = 'BED')
+        return render(request,'core/beds.html',{'Bed_category':Bed_category})
