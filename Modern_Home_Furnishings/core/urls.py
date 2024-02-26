@@ -1,12 +1,15 @@
 from django.urls import path
 from core import views
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
-    path('core/',views.test),
+    
     path('contact_us/',views.contact),
     path('h/about/',views.about,name='x'),
-    path('h/',views.Home,name='home'),
-    path('s/',views.sofas,name='sofa'),
+    path('',views.Home.as_view(),name='home'),
+    path('sofa_categories',views.Sofas.as_view(),name='sofacategories'),
     path('b/',views.beds,name='bed'),
 ]
 

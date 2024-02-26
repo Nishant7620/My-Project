@@ -1,26 +1,41 @@
-{% include "core/navbar.html" %}
-<!DOCTYPE html>
+{% extends "core/base.html" %}
+{% block home %}
 {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sofas</title>
-    <link rel="stylesheet" href="{% static 'core/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'core/css/fontawesome.css' %}">
-</head>
-<body >
-    <div class="sofas_cards">
+
+
+  <div class="container ">                         <!-- we have created new container class-->
+    <div class="row">                           <!-- we have created row class-->
+        {% for dc in sofa_category %}
+        <div class="col-sm-4 ">
+          <a href="" style="text-decoration: none; ">        
+            <div class="card dog_categories_card dog_card" style="width: 18rem; height:20rem">
+                <img class="card-img-top " src="{{dc.pet_image.url}}" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">{{dc.name}}</h5>
+                   <div class="text-center">
+                        <h5 class="font-weight-bold text-dark "><i class="fa-solid fa-indian-rupee-sign"></i> <small class="fw-light rupee"> {{dc.selling_price}}</small> <small class="text-danger">(% off)</small></h5>  
+                    </div>
+                </div>
+            </div>
+          </a>
+        </div>       
+        {% endfor %}
+    </div>
+</div>
+{% endblock home %}
+    {% comment %} <div class="sofas_cards">
     <div class="card" style="width: 20rem;  ">
-        <img src="{% static 'core/images/sofa2.jpg' %}" class="card-img-top" alt="...">
+      {% for dc in  sofa_category%}
+        <img src="{{dc.product_image.url}}" class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <h5 class="card-title">{{dc.name}}</h5>
+          <p class="card-text">{{dc.selling_price}}</p>
           <a href="#" class="btn btn-primary buy_btn">Buy Now</a>
         </div>
       </div>
-      <div class="card" style="width: 20rem;">
+    </div>
+      {% endfor %} {% endcomment %}
+      {% comment %} <div class="card" style="width: 20rem;">
         <img src="{% static 'core/images/sofa3.jpg' %}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Card title</h5>
@@ -62,7 +77,7 @@
             <a href="#" class="btn btn-primary buy_btn" >Buy Now</a>
           </div>
         </div>
-      </div>
+      </div> {% endcomment %}
       
       <script src="{% static 'core/js/bootstrap.min.js' %}"></script>  
     <script src="{% static 'core/js/jquery.js' %}"></script>
