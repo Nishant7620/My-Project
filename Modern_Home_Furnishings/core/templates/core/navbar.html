@@ -14,19 +14,12 @@
         <div class="container-fluid">
           {% comment %} <a class="navbar-brand" href="#" ><img src="{% static 'core/images/logo2.jpg' %}" style="width: 100%;aspect-ratio: 3/2; object-fit: contain;mix-blend-mode: color-burn;" alt=""></a> {% endcomment %}
           <a class="navbar-brand" href="#" style="margin-left: 40px;">Furniture</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <form class="d-flex" role="search" style="margin-left: 350px;">
-                <input class="form-control me-2" type="search" placeholder="Products.." aria-label="Search" style="width:400px  ">
-                <button class="btn btn-outline-success" type="submit" style="margin-left:8px">Search</button>
-              </form>
-            <ul class="navbar-nav ml-auto mb-2 mb-lg-0" style="padding: 10px; margin-right:40px">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url "home" %}">Home</a>
-              </li>
-              <li class="nav-item">
+          
+          <ul class="navbar-nav ml-auto mb-2 mb-lg-0" style="padding: 10px; margin-right:40px">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url "home" %}">Home</a>
+            </li>
+            <li class="nav-item">
                 {% comment %} <a class="nav-link" href="#">Products</a> {% endcomment %}
                 <div class="dropdown">
                   <button class="btn btn-link dropdown-toggle product_btn" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -38,6 +31,36 @@
                     <a class="dropdown-item" href="#"style="color: black;">Something else here</a>
                   </div>
                 </div>
+              </li>
+            </ul>
+
+
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form class="d-flex" role="search" style="margin-left: 100px;">
+                <input class="form-control me-2" type="search" placeholder="Products.." aria-label="Search" style="width:400px  ">
+                <button class="btn btn-outline-success" type="submit" style="margin-left:8px">Search</button>
+              </form>
+            <ul class="navbar-nav ml-auto mb-2 mb-lg-0" style="padding: 10px; margin-right:40px">
+              <li class="nav-item">
+                
+                {% comment %} <a class="nav-link" href="#">Products</a> {% endcomment %}
+                <div class="dropdown">
+                  <button class="btn btn-link dropdown-toggle product_btn" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    User
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{% url "sofa" %}" style="color: black;">Profile</a>
+                    <a class="dropdown-item" href="{% url "bed" %}" style="color: black;" >Orders</a>
+                    <a class="dropdown-item" href="#"style="color: black;">Change Password</a>
+                    <a class="dropdown-item" href="#"style="color: black;">Logout</a>
+                  </div>
+                </div>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url "x" %}">Registration</a>
+                </li>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url "x" %}">About</a>

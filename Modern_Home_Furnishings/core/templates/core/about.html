@@ -1,30 +1,12 @@
 
-{% include "core/navbar.html" %}
-<!DOCTYPE html>
+{% extends "core/base.html" %}
 {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About</title>
-    <link rel="stylesheet" href="{% static 'core/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'core/css/fontawesome.css' %}">
-
-</head>
-<body>
+{% block home %}
     <div class="background_image" >
         <img  src="{% static 'core/images/retro.jpg' %}" alt="" style="width:100%; height: 500px; ">
         <div class="about_text" style="position: absolute; top: 28%; left: 50%; transform: translate(-50%, -50%); font-size: 50px; color: rgb(0, 0, 0); font-weight: 600px;"><b>About Us</b></div>
     </div>
-  
-        
-  
-  
           <!-- START THE FEATURETTES -->
-  
-          
-  
           <div class="row featurette" style="margin-top:px;background-color: #61A3BA ;" >
             <div class="col-md-7">
               <h2 class="featurette-heading" style="margin-left: 50px; margin-top: 80px;">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
@@ -34,10 +16,8 @@
               <img class="featurette-image img-fluid mx-auto " data-src="holder.js/500x500/auto" alt="500x500" src="{% static 'core/images/scandinavian.jpg' %}" data-holder-rendered="true" style="width: 500px; height: 500px; padding:10px;">
             </div>
           </div>
-          
           <hr class="featurette-divider">
           <div class="container marketing" style="margin-top: 50px;">
-  
           <!-- Three columns of text below the carousel -->
           <div class="row">
             <div class="col-lg-4">
@@ -58,13 +38,6 @@
               <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
               <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
             </div><!-- /.col-lg-4 -->
-          </div><!-- /.row -->
-          
-  
-        
+          </div><!-- /.row -->   
       </main>
-      <script src="{% static 'core/js/bootstrap.min.js' %}"></script>  
-    <script src="{% static 'core/js/jquery.js' %}"></script>
-    <script src="{% static 'core/js/popper.js' %}"></script>
-</body>
-</html>
+    {% endblock home %}
