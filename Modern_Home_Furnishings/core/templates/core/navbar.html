@@ -52,12 +52,23 @@
                     User
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="" style="color: black;">Profile</a>
+                    <a class="dropdown-item" href="{% url "profile" %}" style="color: black;">Profile</a>
                     <a class="dropdown-item" href="" style="color: black;" >Orders</a>
-                    <a class="dropdown-item" href="#"style="color: black;">Change Password</a>
-                    <a class="dropdown-item" href="#"style="color: black;">Logout</a>
+                    <a class="dropdown-item" href="{% url "changepassword" %}"style="color: black;">Change Password</a>
+                    <a class="dropdown-item" href="{% url "logout" %}"style="color: black;">Logout</a>
                   </div>
                 </div>
+                {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url "profile" %}">Welcome {{user.first_name}}</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Cart</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url "logout" %}">Logout</a>
+                </li>
+                {% else %}
                 <li class="nav-item">
                   <a class="nav-link" href="{% url "registration" %}">Registration</a>
                 </li>
@@ -68,9 +79,8 @@
               <li class="nav-item">
                 <a class="nav-link" href={% url "login" %}>Login</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Cart</a>
-              </li>
+              
+              {% endif %}
             </ul>
             
           </div>

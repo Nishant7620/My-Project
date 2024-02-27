@@ -1,8 +1,8 @@
 from django.shortcuts import render,redirect
 from django.views import View
 from .models import Customer,Products,Cart
-from .forms import CustomerRegistrationForm,AuthenticateForm,UserProfileForm,AdminProfileForm
-from django.contrib.auth import authenticate,login
+from .forms import CustomerRegistrationForm,AuthenticateForm,UserProfileForm,AdminProfileForm,ChangePasswordForm
+from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 # Create your views here.
 
 # def Home(request):    
@@ -55,26 +55,60 @@ class ProductDetail(View):
 #-----------------------------------------------------------------------------
 
 
-class CustomerRegistrationView(View):
-    def get(self,request):
-        cf = CustomerRegistrationForm()
-        return render(request,'core/registration.html',{'cf':cf}) 
+# class CustomerRegistrationView(View):
+#     def get(self,request):
+#         cf = CustomerRegistrationForm()
+#         return render(request,'core/registration.html',{'cf':cf}) 
 
-    def post(self,request):
-        cf = CustomerRegistrationForm(request.POST)
-        if cf.is_valid():
-            cf.save()
-        return render(request,'core/registration.html',{'cf':cf})    
+#     def post(self,request):
+#         if not request.user.is_authenticated:
+#             if request.method == "POST":
+#                 cf = CustomerRegistrationForm(request.POST)
+#                 if cf.is_valid():
+#                     cf.save()
+#                 return redirect('registration')
+#         else:
+#             return redirect('profile')    
+
+def CustomerRegistration(request):
+    if not request.user.is_authenticated:
+            if request.method == "POST":
+                lf = CustomerRegistrationForm(request.POST)
+                if lf.is_valid():
+                    cf.save()
+                    return redirect('registration')
+            else:
+                lf = CustomerRegistrationForm()
+            return render(request,'core/registration.html',{'cf':cf})
+    else:
+        return redirect('profile')        
 
 
+# class LoginView(View):
+#     def get(self,request):
+#         lf = AuthenticateForm()
+#         return render(request,'core/login.html',{'lf':lf})
 
-class LoginView(View):
-    def get(self,request):
-        lf = AuthenticateForm()
-        return render(request,'core/login.html',{'lf':lf})
+#     def post(self,request):
+#         if not request.user.is_authenticated:
+#             if request.method == "POST":
+#                 lf = AuthenticateForm(request,request.POST)
+#                 if lf.is_valid():
+#                     name = lf.cleaned_data['username']
+#                     pas = lf.cleaned_data['password']
+#                     user = authenticate(username=name,password=pas)
+#                     if user is not None:
+#                         login(request,user)
+#                         return redirect('/')
+#             else :
+#                 lf = AuthenticateForm()
+#             return render(request,'core/login.html',{'lf':lf})    
+#         else:
+#             return redirect('profile')           
 
-    def post(self,request):
-        if not request.user.is_authenticated:
+
+def Login(request):
+    if not request.user.is_authenticated:
             if request.method == "POST":
                 lf = AuthenticateForm(request,request.POST)
                 if lf.is_valid():
@@ -87,16 +121,17 @@ class LoginView(View):
             else :
                 lf = AuthenticateForm()
             return render(request,'core/login.html',{'lf':lf})    
-        else:
-            return redirect('profile')           
-                    
+    else:
+        return redirect('profile') 
+
+
 def profile(request):
     if request.user.is_authenticated:
         if request.method =="POST":
             if request.user.is_superuser ==True:
-                lf = AdminProfileForm(instance=request.user)
+                lf = AdminProfileForm(request.POST,instance=request.user)
             else:
-                lf = UserProfileForm(instance=request.user)
+                lf = UserProfileForm(request.POST,instance=request.user)
             if lf.is_valid():
                 lf.save()
         else:
@@ -107,3 +142,22 @@ def profile(request):
         return render(request,'core/profile.html',{'name':request.user,'lf':lf})            
     else:
         return redirect('login')
+
+
+def log_out(request):
+    logout(request)
+    return redirect('home')
+
+def changepassword(request):
+    if request.user.is_authenticated:
+        if request.method =="POST":
+            lf = ChangePasswordForm(request.user,request.POST)
+            if lf.is_valid():
+                lf.save() 
+                update_session_auth_hash(request,lf.user)
+                return redirect('profile')
+        else:
+            lf = ChangePasswordForm(request.user,request.POST)
+        return render(request,'core/changepassword.html',{'lf':lf})
+    else:
+        return redirect('login')    
