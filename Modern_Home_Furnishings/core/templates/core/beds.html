@@ -2,7 +2,7 @@
 {% block home %}
 <!DOCTYPE html>
 {% load static %}
-<div class="container ">                         <!-- we have created new container class-->
+ <div class="container " style="margin-top: 100px;">                         <!-- we have created new container class-->
   <div class="row">                           <!-- we have created row class-->
       {% for bc in Bed_category %}
       <div class="col-sm-4 ">
@@ -12,7 +12,8 @@
               <div class="card-body">
                 <h5 class="card-title">{{bc.name}}</h5>
                  <div class="text-center">
-                      <h5 class="font-weight-bold text-dark "><i class="fa-solid fa-indian-rupee-sign"></i> <small class="fw-light rupee"> {{bc.selling_price}}</small> <small class="text-danger">(% off)</small></h5>  
+                      <h5 class="font-weight-bold text-dark "><i class="fa-solid fa-indian-rupee-sign"></i> <small class="fw-light rupee"> {{bc.selling_price}}</small> <small class="text-danger">(% off)</small></h5> 
+                      
                   </div>
               </div>
           </div>
@@ -20,6 +21,24 @@
       </div>       
       {% endfor %}
   </div>
-</div>
+</div> 
 
 {% endblock home %}
+
+{% comment %} <div class="container">
+  <div class="row">
+    {% for bc in Bed_category %}  
+
+    <a href="{% url "productdetails" bc.id %}" style="text-decoration: none; ">  
+<div class="card" style="width: 18rem;">
+  <img src="{{bc.pet_image.url}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{bc.name}}</h5>
+    <p class="card-text">{{bc.selling_price}}</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</a>
+</div>
+{% endfor %}
+</div>
+</div> {% endcomment %}

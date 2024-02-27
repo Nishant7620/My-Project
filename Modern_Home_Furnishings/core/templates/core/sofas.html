@@ -2,13 +2,12 @@
 {% block home %}
 {% load static %}
 
-
-  <div class="container ">                         <!-- we have created new container class-->
+  <div class="container "style="margin-top: 100px;">              <!-- we have created new container class-->
     <div class="row">                           <!-- we have created row class-->
         {% for dc in sofa_category %}
         <div class="col-sm-4 ">
           <a href="{% url "productdetails" dc.id %}" style="text-decoration: none; ">        
-            <div class="card dog_categories_card dog_card" style="width: 18rem; height:20rem">
+            <div class="card sofa_categories_card sofa_card" style="width: 18rem; height:20rem">
                 <img class="card-img-top " src="{{dc.pet_image.url}}" alt="Card image cap">
                 <div class="card-body">
                   <h5 class="card-title">{{dc.name}}</h5>
@@ -23,64 +22,6 @@
     </div>
 </div>
 {% endblock home %}
-    {% comment %} <div class="sofas_cards">
-    <div class="card" style="width: 20rem;  ">
-      {% for dc in  sofa_category%}
-        <img src="{{dc.product_image.url}}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">{{dc.name}}</h5>
-          <p class="card-text">{{dc.selling_price}}</p>
-          <a href="#" class="btn btn-primary buy_btn">Buy Now</a>
-        </div>
-      </div>
-    </div>
-      {% endfor %} {% endcomment %}
-      {% comment %} <div class="card" style="width: 20rem;">
-        <img src="{% static 'core/images/sofa3.jpg' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="btn btn-primary buy_btn">Buy Now</a>
-        </div>
-      </div>
-      <div class="card" style="width: 20rem;">
-        <img src="{% static 'core/images/sofa4.jpg' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="btn btn-primary buy_btn" >Buy Now</a>
-        </div>
-      </div>
-    </div>
-    <div class="sofas_cards_2">
-      <div class="card" style="width: 20rem; ; ">
-          <img src="{% static 'core/images/sofa5.jpg' %}" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary buy_btn">Buy Now</a>
-          </div>
-        </div>
-        <div class="card" style="width: 20rem;">
-          <img src="{% static 'core/images/sofa6.jpg' %}" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary buy_btn">Buy Now</a>
-          </div>
-        </div>
-        <div class="card" style="width: 20rem;">
-          <img src="{% static 'core/images/sofa7.jpg' %}" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary buy_btn" >Buy Now</a>
-          </div>
-        </div>
-      </div> {% endcomment %}
+    
       
-      <script src="{% static 'core/js/bootstrap.min.js' %}"></script>  
-    <script src="{% static 'core/js/jquery.js' %}"></script>
-    <script src="{% static 'core/js/popper.js' %}"></script>
-</body>
-</html>
+      
