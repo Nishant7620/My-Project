@@ -12,7 +12,9 @@ urlpatterns = [
     path('sofa_categories',views.Sofas.as_view(),name='sofacategories'),
     path('bed_categories',views.Beds.as_view(),name='bedcategories'),
     path('product_details/<int:id>/',views.ProductDetail.as_view(),name='productdetails'),
-    path('registration',views.CustomerRegistrationView.as_view(),name='registration')
+    path('registration',views.CustomerRegistrationView.as_view(),name='registration'),
+    path('login',views.LoginView.as_view(),name='login'),
+    path('profile',views.profile,name='profile')
 ]
 
 if settings.DEBUG:

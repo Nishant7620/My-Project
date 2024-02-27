@@ -56,7 +56,7 @@ class Products(models.Model):
     small_description = models.TextField()
     description = models.TextField()
     selling_price = models.IntegerField()
-    pet_image = models.ImageField(upload_to = 'pet_images')   # As we are using image field we have to intall 'pillow'. And we have to Define MEDIA_URL in settings.py file so that all folder should save in media directory
+    product_image = models.ImageField(upload_to = 'product_images',default='none')   # As we are using image field we have to intall 'pillow'. And we have to Define MEDIA_URL in settings.py file so that all folder should save in media directory
 
     def __str__(self):
         return str(self.id)

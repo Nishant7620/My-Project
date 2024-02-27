@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views import View
 from .models import Customer,Products,Cart
-from .forms import CustomerRegistrationForm
+from .forms import CustomerRegistrationForm,AuthenticateForm,UserProfileForm,AdminProfileForm
+from django.contrib.auth import authenticate,login
 # Create your views here.
 
 # def Home(request):    
@@ -60,19 +61,49 @@ class CustomerRegistrationView(View):
         return render(request,'core/registration.html',{'cf':cf}) 
 
     def post(self,request):
-        cf = CustomerRegistrationForm(request.Post)
+        cf = CustomerRegistrationForm(request.POST)
         if cf.is_valid():
             cf.save()
         return render(request,'core/registration.html',{'cf':cf})    
 
-# def Registration(request):
-#     if request.method =="POST":
-#         mf = CustomerRegistrationForm(request.Post)
-#         if mf.is_valid():
-#             mf.save()
-#         mf = CustomerRegistrationForm()    
-#     else:
-#         mf = CustomerRegistrationForm()
 
 
-#     return render(request,'core/registration.html',{'mf':mf})    
+class LoginView(View):
+    def get(self,request):
+        lf = AuthenticateForm()
+        return render(request,'core/login.html',{'lf':lf})
+
+    def post(self,request):
+        if not request.user.is_authenticated:
+            if request.method == "POST":
+                lf = AuthenticateForm(request,request.POST)
+                if lf.is_valid():
+                    name = lf.cleaned_data['username']
+                    pas = lf.cleaned_data['password']
+                    user = authenticate(username=name,password=pas)
+                    if user is not None:
+                        login(request,user)
+                        return redirect('/')
+            else :
+                lf = AuthenticateForm()
+            return render(request,'core/login.html',{'lf':lf})    
+        else:
+            return redirect('profile')           
+                    
+def profile(request):
+    if request.user.is_authenticated:
+        if request.method =="POST":
+            if request.user.is_superuser ==True:
+                lf = AdminProfileForm(instance=request.user)
+            else:
+                lf = UserProfileForm(instance=request.user)
+            if lf.is_valid():
+                lf.save()
+        else:
+            if request.user.is_superuser ==True:
+                lf = AdminProfileForm(instance=request.user)   
+            else:
+                lf = UserProfileForm(instance=request.user)
+        return render(request,'core/profile.html',{'name':request.user,'lf':lf})            
+    else:
+        return redirect('login')
