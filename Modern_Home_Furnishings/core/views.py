@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from .models import Customer,Products,Cart
+from .forms import CustomerRegistrationForm
 # Create your views here.
 
 # def Home(request):    
@@ -48,3 +49,18 @@ class ProductDetail(View):
         product_detail = Products.objects.get(pk=id)
 
         return render(request,'core/product_details.html',{'pd':product_detail})
+
+
+#-----------------------------------------------------------------------------
+
+def Registration(request):
+    if request.method =="POST":
+        mf = CustomerRegistrationForm(request.Post)
+        if mf.is_valid():
+            mf.save()
+        mf = CustomerRegistrationForm()    
+    else:
+        mf = CustomerRegistrationForm()
+
+
+    return render(request,'core/registration.html',{'mf':mf})    

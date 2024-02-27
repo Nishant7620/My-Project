@@ -11,7 +11,8 @@ urlpatterns = [
     path('',views.Home.as_view(),name='home'),
     path('sofa_categories',views.Sofas.as_view(),name='sofacategories'),
     path('bed_categories',views.Beds.as_view(),name='bedcategories'),
-    path('product_details/<int:id>/',views.ProductDetail.as_view(),name='productdetails')
+    path('product_details/<int:id>/',views.ProductDetail.as_view(),name='productdetails'),
+    path('registration',views.Registration,name='registration')
 ]
 
 if settings.DEBUG:
