@@ -53,14 +53,26 @@ class ProductDetail(View):
 
 #-----------------------------------------------------------------------------
 
-def Registration(request):
-    if request.method =="POST":
-        mf = CustomerRegistrationForm(request.Post)
-        if mf.is_valid():
-            mf.save()
-        mf = CustomerRegistrationForm()    
-    else:
-        mf = CustomerRegistrationForm()
+
+class CustomerRegistrationView(View):
+    def get(self,request):
+        cf = CustomerRegistrationForm()
+        return render(request,'core/registration.html',{'cf':cf}) 
+
+    def post(self,request):
+        cf = CustomerRegistrationForm(request.Post)
+        if cf.is_valid():
+            cf.save()
+        return render(request,'core/registration.html',{'cf':cf})    
+
+# def Registration(request):
+#     if request.method =="POST":
+#         mf = CustomerRegistrationForm(request.Post)
+#         if mf.is_valid():
+#             mf.save()
+#         mf = CustomerRegistrationForm()    
+#     else:
+#         mf = CustomerRegistrationForm()
 
 
-    return render(request,'core/registration.html',{'mf':mf})    
+#     return render(request,'core/registration.html',{'mf':mf})    

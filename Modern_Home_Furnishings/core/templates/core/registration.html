@@ -6,9 +6,9 @@
     </div>
    <form action="" method="POST" novalidate>
         {% csrf_token %}
-        {% for m in mf%}
+        {% for f in cf%}
         <div class="form-group mr-4 ml-4 ">
-            {{m.label_tag}} {{m}} {{m.errors|striptags}}
+            {{f.label_tag}} {{f}} {{f.errors|striptags}}
         </div>
         {% endfor %}
         <div class="text-center">

@@ -11,3 +11,7 @@ class CustomerRegistrationForm(UserCreationForm):
         model = User
         fields = ['username','first_name','email','password1','password2']
         labels = {'email':'Email'}
+        widgets = {'username':forms.TextInput(attrs={'class':'form-control'}),
+        'email':forms.TextInput(attrs={'class':'form-control'}),
+        'first_name':forms.TextInput(attrs={'class':'form-control'}),
+        }
