@@ -47,7 +47,7 @@
               <li class="nav-item">
                 
                 {% comment %} <a class="nav-link" href="#">Products</a> {% endcomment %}
-                <div class="dropdown">
+                {% comment %} <div class="dropdown">
                   <button class="btn btn-link dropdown-toggle product_btn" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     User
                   </button>
@@ -57,11 +57,23 @@
                     <a class="dropdown-item" href="{% url "changepassword" %}"style="color: black;">Change Password</a>
                     <a class="dropdown-item" href="{% url "logout" %}"style="color: black;">Logout</a>
                   </div>
-                </div>
+                </div> {% endcomment %}
                 {% if request.user.is_authenticated %}
-                <li class="nav-item">
+                <div class="dropdown">
+                  <button class="btn btn-link dropdown-toggle product_btn" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{user.first_name}} 
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{% url "profile" %}" style="color: black;">Profile</a>
+                    <a class="dropdown-item" href="" style="color: black;" >Orders</a>
+                    <a class="dropdown-item" href="{% url "changepassword" %}"style="color: black;">Change Password</a>
+                    <a class="dropdown-item" href="{% url "logout" %}"style="color: black;">Logout</a>
+                  </div>
+                </div>
+
+                {% comment %} <li class="nav-item">
                   <a class="nav-link" href="{% url "profile" %}">Welcome {{user.first_name}}</a>
-                </li>
+                </li> {% endcomment %}
                 <li class="nav-item">
                   <a class="nav-link" href="#">Cart</a>
                 </li>
