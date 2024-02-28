@@ -225,20 +225,16 @@
 
 /*------------------profile-------------------------*/
 .profile {
-   background-color: antiquewhite;
    margin-top: 80px;
-   
-  
 } 
 .profile-form {
-  margin-top: 20px;
-  width: 350px;
-  background-color: #9290C3;
-  border-radius: 20px;
+  margin-top: 40px;
+  width: 390px;
+  background-color: #E8F6EF;
+  border-radius: 5px;
+  box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.25); 
 }
-.sidebar {
-    background-color: aquamarine;
-}
+
 
 .nav-item.elment  {
     background-color: #9290C3;
@@ -250,10 +246,7 @@
     height: 100%;
 }
 
-/* .profile-form {
-   text-align: center;
-   padding: 10px;
-} */
+
 
 .text-primary{ 
     text-align: center;
@@ -262,11 +255,12 @@
 /*---------change-password--------- */
 
 .change-password {
-    margin-top: 100px;
+    margin-top: 140px;
     margin-left: 500px;
-    width: 350px;
-    background-color:rgb(215, 243, 250);
-    border-radius: 20px;
+    width: 390px;
+    background-color:#E8F6EF;
+    border-radius: 5px;
+    box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.25); 
 
   }
 .text-center {
@@ -278,7 +272,7 @@
     background-color:rgb(0, 119, 255);
 }
 
-
+/*-------productdetails-----------*/
 .productdetails {
     margin-top: 100px;
 }
