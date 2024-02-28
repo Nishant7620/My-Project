@@ -30,6 +30,13 @@ class UserProfileForm(UserChangeForm):
     class Meta:
         model = User
         fields = ['username','first_name','email','date_joined','last_login']
+        widgets = {'username':forms.TextInput(attrs={'class':'form-control'}),
+                    'first_name':forms.TextInput(attrs={'class':'form-control'}),
+                    'email':forms.TextInput(attrs={'class':'form-control'}),
+                    'date_joined':forms.DateInput(attrs={'class':'form-control','type':'date'}),
+                    'last_login':forms.DateInput(attrs={'class':'form-control','type':'date'}),
+
+        }
 
 
 class AdminProfileForm(UserChangeForm):

@@ -79,7 +79,7 @@ def CustomerRegistration(request):
                     return redirect('registration')
             else:
                 lf = CustomerRegistrationForm()
-            return render(request,'core/registration.html',{'cf':cf})
+            return render(request,'core/registration.html',{'lf':lf})
     else:
         return redirect('profile')        
 
