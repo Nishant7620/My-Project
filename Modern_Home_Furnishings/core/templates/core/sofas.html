@@ -2,12 +2,12 @@
 {% block home %}
 {% load static %}
 
-  <div class="container "style="margin-top: 100px;">              <!-- we have created new container class-->
+  <div class="container">              <!-- we have created new container class-->
     <div class="row">                           <!-- we have created row class-->
         {% for dc in sofa_category %}
         <div class="col-sm-4 ">
           <a href="{% url "productdetails" dc.id %}" style="text-decoration: none; ">        
-            <div class="card sofa_categories_card sofa_card" style="width: 18rem; height:20rem">
+            <div class="card sofa_categories_card sofa_card " style="width: 18rem; height:20rem;">
                 <img class="card-img-top " src="{{dc.product_image.url}}" alt="Card image cap">
                 <div class="card-body">
                   <h5 class="card-title">{{dc.name}}</h5>

@@ -13,6 +13,7 @@ from django.contrib import messages
 
 class Home(View):
     def get(self,request,):
+        bed = Products.objects.filter(category = "BED",id=15)
         return render(request,'core/home.html')
 
 def contact(request):    
