@@ -13,8 +13,9 @@ from django.contrib import messages
 
 class Home(View):
     def get(self,request,):
-        bed = Products.objects.filter(category = "BED",id=15)
-        return render(request,'core/home.html')
+        bed_ids = [15,16,17]
+        bed = Products.objects.filter(category = "BED",id__in =bed_ids)
+        return render(request,'core/home.html',{'bed':bed})
 
 def contact(request):    
     return render(request,'core/contact_us.html')
