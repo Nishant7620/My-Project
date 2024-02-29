@@ -24,7 +24,7 @@ def about(request):
     return render(request,'core/about.html')    
 
 
-    
+
 
 # def sofas(request):    
 #     return render(request,'core/sofas.html') 
