@@ -3,6 +3,7 @@ from django.views import View
 from .models import Customer,Products,Cart
 from .forms import CustomerRegistrationForm,AuthenticateForm,UserProfileForm,AdminProfileForm,ChangePasswordForm
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
+from django.contrib import messages
 # Create your views here.
 
 # def Home(request):    
@@ -11,9 +12,8 @@ from django.contrib.auth import authenticate,login,logout,update_session_auth_ha
 # class base view 
 
 class Home(View):
-    def get(self,request):
-        Bed_category = Products.objects.filter(category = 'BED')
-        return render(request,'core/home.html',{'Bed_category':Bed_category})
+    def get(self,request,):
+        return render(request,'core/home.html')
 
 def contact(request):    
     return render(request,'core/contact_us.html')
@@ -22,6 +22,7 @@ def about(request):
     return render(request,'core/about.html')    
 
 
+    
 
 # def sofas(request):    
 #     return render(request,'core/sofas.html') 
@@ -76,6 +77,7 @@ def CustomerRegistration(request):
             if request.method == "POST":
                 lf = CustomerRegistrationForm(request.POST)
                 if lf.is_valid():
+                    messages.success(request,'Congratulations!! Registered Successfully')    
                     lf.save()
                     return redirect('registration')
             else:

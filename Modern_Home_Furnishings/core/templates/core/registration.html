@@ -5,6 +5,11 @@
         <h2 class="mb-3 text-primary">Register Here</h2>
     </div>
    <form action="" method="POST" novalidate>
+    {% if messages %}
+    {% for m in messages %}
+     <p {% if m.tags %} class="alert alert-{{m.tags}} mb-5" {% endif %}>{{m}}" </p>
+    {% endfor %}
+    {% endif %}
         {% csrf_token %}
         {% for f in lf%}
         <div class="form-group mr-4 ml-4 ">
