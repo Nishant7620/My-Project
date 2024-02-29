@@ -137,13 +137,24 @@ def profile(request):
                 lf = AdminProfileForm(request.POST,instance=request.user)
             else:
                 lf = UserProfileForm(request.POST,instance=request.user)
-            if lf.is_valid():
+                if lf.is_valid():
+                    usr = request.user
+                    name = lf.cleaned_data['name']
+                    address = lf.cleaned_data['address']
+                    city = lf.cleaned_data['city']
+                    state = lf.cleaned_data['state']
+                    pincode = lf.cleaned_data['pincode']
+                    reg = Customer(user=usr, name=name, address=address, city=city, state=state, pincode=pincode)
+                    reg.save()
+                    messages.success(request, 'Congratulations!! Profile Updated Successfully.')
                 lf.save()
         else:
             if request.user.is_superuser ==True:
                 lf = AdminProfileForm(instance=request.user)   
             else:
                 lf = UserProfileForm(instance=request.user)
+                
+
         return render(request,'core/profile.html',{'name':request.user,'lf':lf})            
     else:
         return redirect('login')
@@ -168,5 +179,7 @@ def changepassword(request):
         return redirect('login')    
 
 
-
+def address(request):
+ add = Customer.objects.filter(user=request.user)
+ return render(request, 'core/address.html', {'add':add, 'active':'btn-primary',})
 

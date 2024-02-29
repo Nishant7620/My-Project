@@ -61,7 +61,7 @@
                 {% if request.user.is_authenticated %}
                 <div class="dropdown">
                   <button class="btn btn-link dropdown-toggle product_btn" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{user.first_name}} 
+                    {{user.username| capfirst}} 
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="{% url "profile" %}" style="color: black;">Profile</a>

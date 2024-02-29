@@ -11,19 +11,21 @@
     <link rel="stylesheet" href="{% static 'core/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'core/css/fontawesome.css' %}">
-</head>s
+</head>
+<div class="cards_main" style="background-color:#DCF2F1 ;">
 <div class="card_heading_text">
     <h1>OUR POPULAR PRODUCTS</h1>
 </div> 
-<div class="container " style="margin-top: 80px;">                         <!-- we have created new container class-->
+<div class="container home_card_container" >                         <!-- we have created new container class-->
   <div class="row">                           <!-- we have created row class-->
       {% for b in bed %}
       <div class="col-sm-4 ">
         <a href="{% url "productdetails" b.id %}" style="text-decoration: none; ">        
-          <div class="card bed_categories_card_home bed_card_home" style="width: 18rem; height:20rem;">
+          <div class="card bed_categories_card_home bed_card_home" style="width: 20rem; height:25rem;">
               <img class="card-img-top " src="{{b.product_image.url}}" alt="Card image cap">
               <div class="card-body">
                 <h5 class="card-title">{{b.name}}</h5>
+                <p class="font-weight-bold text-dark">Rs.{{b.selling_price}}</p>
                  <div class="text-center">
                       <h5 class="font-weight-bold text-dark "><i class="fa-solid fa-indian-rupee-sign"></i> <small class="fw-light rupee"> {{bc.selling_price}}</small> <small class="text-danger">(% off)</small></h5> 
                       
@@ -35,6 +37,7 @@
       {% endfor %}
   </div>
 </div> 
+</div>
 
       <script src="{% static 'core/js/bootstrap.min.js' %}"></script>
       <script src="{% static 'core/js/jquery.js' %}"></script>

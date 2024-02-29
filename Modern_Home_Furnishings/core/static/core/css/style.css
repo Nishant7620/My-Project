@@ -47,7 +47,7 @@
 
 .card_heading_text {
     background-color: #DCF2F1;
-    padding: 35px;
+    padding: 15px;
     padding-top: 40px;
     text-align: center;
 }
@@ -230,6 +230,7 @@
 
 .bed_card {
     background-color: #F0F3FF;
+    
 }
 
 /*------------------profile-------------------------*/
@@ -330,3 +331,15 @@
     text-decoration: none;
 }
 
+/*-------home card-----------*/
+
+.home_card_container {
+    background-color: #DCF2F1;
+    padding: 40px;
+}
+
+
+.bed_card_home {
+
+box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
+}
