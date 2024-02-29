@@ -1,6 +1,7 @@
 {% extends "core/base.html" %}
+{% load static %}
 {% block home %}
-<body style="background-color:#F0F0F0;">
+<body id="profile_id" style="background-image: url('{% static "core/images/registrationbg.jpg" %}');">
     <div class="container-fluid profile" >
         <div class="row">
           <div class="col-md-2 d-none d-md-block sidebar" >

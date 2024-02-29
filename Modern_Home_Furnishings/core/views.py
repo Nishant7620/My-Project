@@ -12,7 +12,8 @@ from django.contrib.auth import authenticate,login,logout,update_session_auth_ha
 
 class Home(View):
     def get(self,request):
-        return render(request,'core/home.html')
+        Bed_category = Products.objects.filter(category = 'BED')
+        return render(request,'core/home.html',{'Bed_category':Bed_category})
 
 def contact(request):    
     return render(request,'core/contact_us.html')
@@ -75,7 +76,7 @@ def CustomerRegistration(request):
             if request.method == "POST":
                 lf = CustomerRegistrationForm(request.POST)
                 if lf.is_valid():
-                    cf.save()
+                    lf.save()
                     return redirect('registration')
             else:
                 lf = CustomerRegistrationForm()
@@ -161,3 +162,7 @@ def changepassword(request):
         return render(request,'core/changepassword.html',{'lf':lf})
     else:
         return redirect('login')    
+
+
+
+

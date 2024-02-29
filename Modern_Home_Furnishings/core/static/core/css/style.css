@@ -224,13 +224,24 @@
 }
 
 /*------------------profile-------------------------*/
+
+
+#profile_id {
+    background-color:#F0F0F0;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    
+}
+
 .profile {
    margin-top: 80px;
 } 
 .profile-form {
   margin-top: 40px;
   width: 390px;
- 
+  background: transparent;
+  backdrop-filter: blur(5px);
   border-radius: 5px;
   box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.25); 
 }
@@ -297,3 +308,16 @@
 .already a{
     text-decoration: none;
 }
+
+.dont_account {
+    padding: 2px;
+}
+
+.dont_account p{
+    text-align: center;
+}
+
+.dont_account a{
+    text-decoration: none;
+}
+
