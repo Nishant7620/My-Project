@@ -169,10 +169,14 @@
 
 
 .sofa_categories_card {
-    margin-top: 100px;
+    margin-top: 120px;
+    margin-bottom: 40px;
     
 }
 
+.sofa_categories_card:hover {
+box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
+}
 .sofa_card {
     background-color: #F0F3FF;
 }
@@ -224,14 +228,22 @@
 } */
 
 .bed_categories_card {
-    margin-top: 50px;
+    margin-top: 40px;
+    margin-bottom: 30px;
     
 }
+
+
+.bed_categories_card:hover {
+    box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
+}
+
 
 .bed_card {
     background-color: #F0F3FF;
     
 }
+
 
 /*------------------profile-------------------------*/
 
@@ -249,6 +261,7 @@
 } 
 .profile-form {
   margin-top: 40px;
+  margin-bottom: 40px;
   width: 390px;
   background: transparent;
   backdrop-filter: blur(5px);
@@ -277,6 +290,7 @@
 
 .change-password {
     margin-top: 140px;
+    margin-bottom: 50px;
     margin-left: 500px;
     width: 390px;
    
@@ -296,6 +310,7 @@
 /*-------productdetails-----------*/
 .productdetails {
     margin-top: 100px;
+    margin-bottom: 40px;
 }
 
 /*-------registration form-----------*/

@@ -30,9 +30,11 @@ class UserProfileForm(forms.ModelForm):
   class Meta:
     model = Customer
     fields = ['name', 'address','city', 'state', 'pincode']
-    widgets = {'name':forms.TextInput(attrs={'class':'form-control'}),'address':forms.TextInput(attrs={'class':'form-control'}), 'city':forms.TextInput(attrs={'class':'form-control'}), 
-    'state':forms.Select(attrs={'class':'form-control'}),
-    'pincode':forms.NumberInput(attrs={'class':'form-control'})}
+    widgets = {'name':forms.TextInput(attrs={'class':'form-control'}),
+                'address':forms.TextInput(attrs={'class':'form-control'}), 
+                'city':forms.TextInput(attrs={'class':'form-control'}), 
+                'state':forms.Select(attrs={'class':'form-control'}),
+                'pincode':forms.NumberInput(attrs={'class':'form-control'})}
 
 
 class AdminProfileForm(UserChangeForm):

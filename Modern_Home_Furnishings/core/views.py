@@ -4,6 +4,7 @@ from .models import Customer,Products,Cart
 from .forms import CustomerRegistrationForm,AuthenticateForm,UserProfileForm,AdminProfileForm,ChangePasswordForm
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 from django.contrib import messages
+from django.contrib.auth.models import User
 # Create your views here.
 
 # def Home(request):    
@@ -152,7 +153,9 @@ def profile(request):
             if request.user.is_superuser ==True:
                 lf = AdminProfileForm(instance=request.user)   
             else:
-                lf = UserProfileForm(instance=request.user)
+
+                info =Customer.objects.get(user=request.user)
+                lf = UserProfileForm(instance=info)
                 
 
         return render(request,'core/profile.html',{'name':request.user,'lf':lf})            

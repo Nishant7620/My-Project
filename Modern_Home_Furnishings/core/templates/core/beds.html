@@ -6,7 +6,7 @@
       {% for bc in Bed_category %}
       <div class="col-sm-4 ">
         <a href="{% url "productdetails" bc.id %}" style="text-decoration: none; ">        
-          <div class="card bed_categories_card bed_card" style="width: 18rem; height:20rem">
+          <div class="card bed_categories_card bed_card" style="width: 20rem; height:23rem">
               <img class="card-img-top " src="{{bc.product_image.url}}" alt="Card image cap">
               <div class="card-body">
                 <h5 class="card-title">{{bc.name}}</h5>
