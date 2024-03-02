@@ -150,10 +150,8 @@ def profile(request):
                 lf = AdminProfileForm(instance=request.user)   
             else:
 
-                info =Customer.objects.get(user=request.user)
-                lf = UserProfileForm(instance=info)
-                
-
+                # info =Customer.objects.get(user=request.user)
+                lf = UserProfileForm(instance=request.user)
         return render(request,'core/profile.html',{'name':request.user,'lf':lf})            
     else:
         return redirect('login')
@@ -182,3 +180,16 @@ def address(request):
  add = Customer.objects.filter(user=request.user)
  return render(request, 'core/address.html', {'add':add, 'active':'btn-primary',})
 
+
+def add_to_cart(request,id):
+    if request.user.is_authenticated:
+        product = Products.objects.get(pk=id)
+        user = request.user
+        Cart(user=user,product=product).save()
+        return redirect('productdetails', id)
+    else:
+        return redirect('login')    
+
+def view_cart(request):
+    cart_item = Cart.objects.filter(user=request.user)
+    return render(request,'core/view_cart.html',{'cart_item':cart_item})
