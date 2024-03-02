@@ -90,3 +90,9 @@ class Order(models.Model):
     def __str__(self):
         return str(self.id)
         
+
+class Contact(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.CharField(max_length=100)
+    messege = models.CharField(max_length=100)
+    

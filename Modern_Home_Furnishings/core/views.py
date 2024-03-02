@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.views import View
 from .models import Customer,Products,Cart
-from .forms import CustomerRegistrationForm,AuthenticateForm,UserProfileForm,AdminProfileForm,ChangePasswordForm
+from .forms import CustomerRegistrationForm,AuthenticateForm,UserProfileForm,AdminProfileForm,ChangePasswordForm,ContactForm
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -18,17 +18,14 @@ class Home(View):
         bed = Products.objects.filter(category = "BED",id__in =bed_ids)
         return render(request,'core/home.html',{'bed':bed})
 
-def contact(request):    
-    return render(request,'core/contact_us.html')
+def contact(request):
+    form = ContactForm()    
+    return render(request,'core/contact_us.html',{'form':form})
 
 def about(request):    
     return render(request,'core/about.html')    
 
 
-
-
-# def sofas(request):    
-#     return render(request,'core/sofas.html') 
 
 #class base view of Sofas Categories
 
@@ -53,7 +50,6 @@ class Beds(View):
 class ProductDetail(View):
     def get(self,request,id):
         product_detail = Products.objects.get(pk=id)
-
         return render(request,'core/product_details.html',{'pd':product_detail})
 
 

@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,PasswordChangeForm,UserChangeForm
 from django.contrib.auth.models import User
-from .models import Customer
+from .models import Customer,Contact
 
 
 class CustomerRegistrationForm(UserCreationForm):
@@ -43,3 +43,13 @@ class AdminProfileForm(UserChangeForm):
         model = User
         fields = '__all__'
 
+
+class ContactForm(forms.ModelForm):
+
+    class Meta:
+        model = Contact
+        fields = ['name','email','messege']
+        wigets = {'name':forms.TextInput(attrs={'class':'form-control'}),
+        'email':forms.TextInput(attrs={'class':'form-control'}),
+        'messege':forms.TextInput(attrs={'class':'form-control'})}
+    
