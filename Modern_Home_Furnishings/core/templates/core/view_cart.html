@@ -64,14 +64,14 @@
                       </div>
                       <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
                           <button class="btn btn-link px-2">
-                          <a href=""><i class="fas fa-minus"></i></a>
+                          <a href="{% url "delete_quantity" item.id %}"><i class="fas fa-minus"></i></a>
                           </button>
                           <div class="form-control form-control-sm">
                               {{item.quantity}}     
                           </div>
                           <button class="btn btn-link px-2">
-                           <a href=""><i class="fas fa-plus"></i></a> <!-- When we will click on + icon   add_quantity url will be hit along with item.id, item.id hold the 'id' of Cart model, so that quantity should be added of that particular pet and current user -->
-                          </button>
+                           <a href="{% url "add_quantity" item.id %}"><i class="fas fa-plus"></i></a> <!-- When we will click on + icon  {% url 'add_quantity' item.id %} add_quantity url will be hit along with item.id, item.id hold the 'id' of Cart model, so that quantity should be added of that particular pet and current user -->
+                          </button>     
                       </div>
                       <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1 ">
                           <h5 class="mb-0">₹{{item.product.selling_price}}</h5>

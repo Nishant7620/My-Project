@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.views import View
 from .models import Customer,Products,Cart
 from .forms import CustomerRegistrationForm,AuthenticateForm,UserProfileForm,AdminProfileForm,ChangePasswordForm,ContactForm
@@ -144,7 +144,7 @@ def profile(request):
                     reg = Customer(user=usr, name=name, address=address, city=city, state=state, pincode=pincode)
                     reg.save()
                     messages.success(request, 'Congratulations!! Profile Updated Successfully.')
-                lf.save()
+                    lf.save()
         else:
             if request.user.is_superuser ==True:
                 lf = AdminProfileForm(instance=request.user)   
@@ -193,3 +193,17 @@ def add_to_cart(request,id):
 def view_cart(request):
     cart_item = Cart.objects.filter(user=request.user)
     return render(request,'core/view_cart.html',{'cart_item':cart_item})
+
+
+def delete_quantity(request,id):
+    product = get_object_or_404(Cart,pk=id)
+    if product.quantity > 1:
+        product.quantity -= 1
+        product.save()
+    return redirect('viewcart')    
+
+def add_quantity(request,id):
+    product = get_object_or_404(Cart,pk=id)
+    product.quantity +=1
+    product.save()
+    return redirect('viewcart')
