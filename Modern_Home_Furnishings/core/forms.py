@@ -50,7 +50,7 @@ class ContactForm(forms.ModelForm):
         model = Contact
         fields = ['name','email','message']
 
-        wigets = {'name':forms.TextInput(attrs={'class':'form-control'}),
+        widgets = {'name':forms.TextInput(attrs={'class':'form-control'}),
         'email':forms.TextInput(attrs={'class':'form-control'}),
         'message':forms.TextInput(attrs={'class':'form-control'})}
     
