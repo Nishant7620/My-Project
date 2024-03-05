@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.views import View
-from .models import Customer,Products,Cart
+from .models import Customer,Products,Contact,Cart
 from .forms import CustomerRegistrationForm,AuthenticateForm,UserProfileForm,AdminProfileForm,ChangePasswordForm,ContactForm
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 from django.contrib import messages
@@ -19,7 +19,14 @@ class Home(View):
         return render(request,'core/home.html',{'bed':bed})
 
 def contact(request):
-    form = ContactForm()    
+    # form = ContactForm()   
+    if request.method =="POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    else:
+        form = ContactForm()        
     return render(request,'core/contact_us.html',{'form':form})
 
 def about(request):    
