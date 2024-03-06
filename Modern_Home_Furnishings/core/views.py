@@ -216,6 +216,7 @@ def delete_quantity(request,id):
     return redirect('viewcart')    
 
 def add_quantity(request,id):
+    print(id)
     product = get_object_or_404(Cart,pk=id)
     product.quantity +=1
     product.save()
