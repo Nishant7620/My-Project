@@ -52,5 +52,5 @@ class ContactForm(forms.ModelForm):
 
         widgets = {'name':forms.TextInput(attrs={'class':'form-control'}),
         'email':forms.TextInput(attrs={'class':'form-control'}),
-        'message':forms.TextInput(attrs={'class':'form-control'})}
+        'message':forms.Textarea(attrs={'class':'form-control'})}
     
