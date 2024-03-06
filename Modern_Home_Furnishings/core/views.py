@@ -199,7 +199,13 @@ def add_to_cart(request,id):
 
 def view_cart(request):
     cart_item = Cart.objects.filter(user=request.user)
-    return render(request,'core/view_cart.html',{'cart_item':cart_item})
+    total = 0
+    delivery_charge = 2000
+    for item in cart_item:
+        item.product.price_and_quantity_total = item.product.selling_price * item.quantity
+        total += item.product.price_and_quantity_total
+    final_price = delivery_charge + total
+    return render(request,'core/view_cart.html',{'cart_item':cart_item,'total':total,'final_price':final_price})
 
 
 def delete_quantity(request,id):
@@ -214,3 +220,9 @@ def add_quantity(request,id):
     product.quantity +=1
     product.save()
     return redirect('viewcart')
+
+def deletecart(request,id):
+    if request.method=="POST":
+        de = Cart.objects.get(pk=id)
+        de.delete()
+    return redirect('viewcart')    
