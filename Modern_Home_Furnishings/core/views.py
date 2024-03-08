@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.views import View
 from .models import Customer,Products,Contact,Cart
-from .forms import CustomerRegistrationForm,AuthenticateForm,UserProfileForm,AdminProfileForm,ChangePasswordForm,ContactForm
+from .forms import CustomerRegistrationForm,AuthenticateForm,UserProfileForm,AdminProfileForm,ChangePasswordForm,ContactForm,CustomerForm
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -63,21 +63,6 @@ class ProductDetail(View):
 #-----------------------------------------------------------------------------
 
 
-# class CustomerRegistrationView(View):
-#     def get(self,request):
-#         cf = CustomerRegistrationForm()
-#         return render(request,'core/registration.html',{'cf':cf}) 
-
-#     def post(self,request):
-#         if not request.user.is_authenticated:
-#             if request.method == "POST":
-#                 cf = CustomerRegistrationForm(request.POST)
-#                 if cf.is_valid():
-#                     cf.save()
-#                 return redirect('registration')
-#         else:
-#             return redirect('profile')    
-
 def CustomerRegistration(request):
     if not request.user.is_authenticated:
             if request.method == "POST":
@@ -91,30 +76,6 @@ def CustomerRegistration(request):
             return render(request,'core/registration.html',{'lf':lf})
     else:
         return redirect('profile')        
-
-
-# class LoginView(View):
-#     def get(self,request):
-#         lf = AuthenticateForm()
-#         return render(request,'core/login.html',{'lf':lf})
-
-#     def post(self,request):
-#         if not request.user.is_authenticated:
-#             if request.method == "POST":
-#                 lf = AuthenticateForm(request,request.POST)
-#                 if lf.is_valid():
-#                     name = lf.cleaned_data['username']
-#                     pas = lf.cleaned_data['password']
-#                     user = authenticate(username=name,password=pas)
-#                     if user is not None:
-#                         login(request,user)
-#                         return redirect('/')
-#             else :
-#                 lf = AuthenticateForm()
-#             return render(request,'core/login.html',{'lf':lf})    
-#         else:
-#             return redirect('profile')           
-
 
 def Login(request):
     if not request.user.is_authenticated:
@@ -206,7 +167,6 @@ def delete_quantity(request,id):
     return redirect('viewcart')    
 
 def add_quantity(request,id):
-    print(id)
     product = get_object_or_404(Cart,pk=id)
     product.quantity +=1
     product.save()
@@ -217,3 +177,20 @@ def deletecart(request,id):
         de = Cart.objects.get(pk=id)
         de.delete()
     return redirect('viewcart')    
+
+def address(request):
+    if request.method =="POST":
+        form = CustomerForm(request.POST)
+        if form.is_valid():
+            user=request.user
+            name = form.cleaned_data['name']
+            address = form.cleaned_data['address']
+            city = form.cleaned_data['city']
+            pincode = form.cleaned_data['pincode']
+            Customer(user=user,name=name,address=address,city=city,pincode=pincode).save()
+            return redirect('address')
+            
+    else:           
+        form = CustomerForm()
+        address = Customer.objects.filter(user=request.user) 
+    return render(request,'core/address.html',{'form':form,'address':address})    

@@ -38,6 +38,21 @@ class UserProfileForm(UserChangeForm):
                 'last_login':forms.DateInput(attrs={'class':'form-control','type':'date'})}
 
 
+class CustomerForm(forms.ModelForm):
+    class Meta:
+        model = Customer
+        fields = ['name','address','city','state','pincode']
+        labels = {'name':'Full Name'}
+        widgets = {'name':forms.TextInput(attrs={'class':'form-control'}),
+                    'address':forms.TextInput(attrs={'class':'form-control'}),
+                    'city':forms.TextInput(attrs={'class':'form-control'}),
+                    'state':forms.Select(attrs={'class':'form-control'}),
+                    'pincode':forms.NumberInput(attrs={'class':'form-control'})}
+
+
+
+
+
 class AdminProfileForm(UserChangeForm):
     password = None
     class Meta:
