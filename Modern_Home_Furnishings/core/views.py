@@ -144,7 +144,7 @@ def add_to_cart(request,id):
         product = Products.objects.get(pk=id)
         user = request.user
         Cart(user=user,product=product).save()
-        return redirect('productdetails', id)
+        return redirect('productdetails',id)
     else:
         return redirect('login')    
 
@@ -193,4 +193,11 @@ def address(request):
     else:           
         form = CustomerForm()
         address = Customer.objects.filter(user=request.user) 
-    return render(request,'core/address.html',{'form':form,'address':address})    
+    return render(request,'core/address.html',{'form':form,'address':address})  
+
+
+def deleteaddress(request,id):
+    if request.method =='POST':
+        de =Customer.objects.get(pk=id)
+        de.delete()
+    return redirect('address')
