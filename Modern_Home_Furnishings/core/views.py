@@ -5,6 +5,15 @@ from .forms import CustomerRegistrationForm,AuthenticateForm,UserProfileForm,Adm
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 from django.contrib import messages
 from django.contrib.auth.models import User
+
+#=====================For Paypal=============================================
+from paypal.standard.forms import PayPalPaymentsForm
+from django.conf import settings
+import uuid
+from django.urls import reverse
+
+#========================================================================
+
 # Create your views here.
 
 # def Home(request):    
@@ -201,3 +210,42 @@ def deleteaddress(request,id):
         de =Customer.objects.get(pk=id)
         de.delete()
     return redirect('address')
+
+def checkout(request):
+
+    host =request.get_host()   # Will fecth the domain site is currently hosted on.
+
+    cart_item = Cart.objects.filter(user=request.user)
+    total = 0
+    delivery_charge = 2000
+    for item in cart_item:
+        item.product.price_and_quantity_total = item.product.selling_price * item.quantity
+        total += item.product.price_and_quantity_total
+    final_price = delivery_charge + total
+    
+    address = Customer.objects.filter(user=request.user)
+
+#===================Paypal code===========================================
+    paypal_checkout = {
+        'business':settings.PAYPAL_RECEIVER_EMAIL,
+        'amount':final_price,
+        'item_name':'Product',
+        'invoice':uuid.uuid4(),
+        'currency_code':'USD',
+        'notify_url':f"http://{host}{reverse('paypal-ipn')}",
+        'return_url':f"http://{host}{reverse('paymentsuccess')}",
+        'cancel_url':f"http://{host}{reverse('paymentfailed')}",
+    }
+
+    paypal_payment = PayPalPaymentsForm(initial=paypal_checkout)
+
+#=================================================================================
+
+    return render(request,'core/checkout.html',{'cart_item':cart_item,'total':total,'final_price':final_price,'address':address,'paypal':paypal_payment})
+
+def payment_success(request):
+    return render(request,'core/payment_successful.html')
+
+def payment_failed(request):
+    return render(request,'core/payment_failed.html')    
+

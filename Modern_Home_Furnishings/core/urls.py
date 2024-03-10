@@ -23,7 +23,10 @@ urlpatterns = [
     path('add_quantity/<int:id>/',views.add_quantity,name='add_quantity'),
     path('deletecart/<int:id>/',views.deletecart,name='deletecart'),
     path('address/',views.address,name='address'),
-    path('deleteaddress/<int:id>/',views.deleteaddress,name='deleteaddress')
+    path('deleteaddress/<int:id>/',views.deleteaddress,name='deleteaddress'),
+    path('checkout/',views.checkout,name='checkout'),
+    path('payment_success/',views.payment_success,name='paymentsuccess'),
+    path('payment_failed/',views.payment_failed,name='paymentfailed'),
     
 ]
 
