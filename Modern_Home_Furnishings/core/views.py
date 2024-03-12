@@ -16,10 +16,8 @@ from django.urls import reverse
 
 # Create your views here.
 
-# def Home(request):    
-#     return render(request,'core/home.html')         
 
-# class base view 
+#-----------------class base view of Home---------------------------
 
 class Home(View):
     def get(self,request,):
@@ -27,8 +25,7 @@ class Home(View):
         bed = Products.objects.filter(category = "BED",id__in =bed_ids)
         return render(request,'core/home.html',{'bed':bed})
 
-def contact(request):
-    # form = ContactForm()   
+def contact(request):    
     if request.method =="POST":
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -38,12 +35,13 @@ def contact(request):
         form = ContactForm()        
     return render(request,'core/contact_us.html',{'form':form})
 
+
 def about(request):    
     return render(request,'core/about.html')    
 
 
 
-#class base view of Sofas Categories
+#-------class base view of Sofas Categories------------
 
 class Sofas(View):
     def get(self,request):
@@ -52,7 +50,7 @@ class Sofas(View):
 
 
 
-# class base view of Beds Categories
+#-------- class base view of Beds Categories---------------
 
 class Beds(View):
     def get(self,request):
@@ -60,7 +58,7 @@ class Beds(View):
         return render(request,'core/beds.html',{'Bed_category':Bed_category})
 
 
-# class base view of Product Details
+#----------- class base view of Product Details--------------------------------
 
 
 class ProductDetail(View):
@@ -69,7 +67,7 @@ class ProductDetail(View):
         return render(request,'core/product_details.html',{'pd':product_detail})
 
 
-#-----------------------------------------------------------------------------
+#-------------------------------Registration-------------------------------------
 
 
 def CustomerRegistration(request):
@@ -86,9 +84,11 @@ def CustomerRegistration(request):
     else:
         return redirect('profile')        
 
+#-------------------------------Login-------------------------------------
+
 def Login(request):
-    if not request.user.is_authenticated:
-            if request.method == "POST":
+    if not request.user.is_authenticated:           # check whether user is not login ,if so it will show login option
+            if request.method == "POST":             # otherwise it will redirect to the profile page  
                 lf = AuthenticateForm(request,request.POST)
                 if lf.is_valid():
                     name = lf.cleaned_data['username']
@@ -103,9 +103,10 @@ def Login(request):
     else:
         return redirect('profile') 
 
+#-------------------------------Profile-------------------------------------
 
 def profile(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated:       # This check wheter user is login, if not it will redirect to login page
         if request.method =="POST":
             if request.user.is_superuser ==True:
                 lf = AdminProfileForm(request.POST,instance=request.user)
@@ -120,17 +121,21 @@ def profile(request):
             else:
                 lf = UserProfileForm(instance=request.user)
         return render(request,'core/profile.html',{'name':request.user,'lf':lf})            
-    else:
+    else:                                                # request.user returns the username
         return redirect('login')
 
+#-------------------------------Logout-------------------------------------
 
 def log_out(request):
     logout(request)
     return redirect('home')
 
+
+#-------------------------------Change Password-------------------------------------
+
 def changepassword(request):
-    if request.user.is_authenticated:
-        if request.method =="POST":
+    if request.user.is_authenticated:                # Password Change Form
+        if request.method =="POST":                  # Include old password 
             lf = ChangePasswordForm(request.user,request.POST)
             if lf.is_valid():
                 lf.save() 
@@ -148,16 +153,18 @@ def address(request):
  return render(request, 'core/address.html', {'add':add, 'active':'btn-primary',})
 
 
-def add_to_cart(request,id):
-    if request.user.is_authenticated:
-        product = Products.objects.get(pk=id)
-        user = request.user
-        Cart(user=user,product=product).save()
-        return redirect('productdetails',id)
-    else:
-        return redirect('login')    
+#=========================== Add TO Cart Section =================================================
 
-def view_cart(request):
+def add_to_cart(request,id):                 # This 'id' is coming from 'pd.id' which hold the id of current product , which is passing through {% url 'addtocart' pd.id %} from pet_detail.html 
+    if request.user.is_authenticated:
+        product = Products.objects.get(pk=id)    # product variable is holding data of current object which is passed through 'id' from parameter
+        user = request.user                         # user variable store the current user i.e nishant1
+        Cart(user=user,product=product).save()      # In cart model current user i.e nishant1 will save in user variable and current product object will be save in product variable
+        return redirect('productdetails',id)         # finally it will redirect to product_details.html with current object 'id' to display product after adding to the cart
+    else:
+        return redirect('login')                     # If user is not login it will redirect to login page
+
+def view_cart(request):                                  # cart_items will fetch product of current user, and show product available in the cart of the current user.
     cart_item = Cart.objects.filter(user=request.user)
     total = 0
     delivery_charge = 2000
@@ -175,9 +182,9 @@ def delete_quantity(request,id):
         product.save()
     return redirect('viewcart')    
 
-def add_quantity(request,id):
-    product = get_object_or_404(Cart,pk=id)
-    product.quantity +=1
+def add_quantity(request,id):                       
+    product = get_object_or_404(Cart,pk=id)               # If the object is found, it returns the object. If not, it raises an HTTP 404 exception (Http404).
+    product.quantity +=1                              # If object found it will be add 1 quantity to the current object   
     product.save()
     return redirect('viewcart')
 
@@ -187,11 +194,15 @@ def deletecart(request,id):
         de.delete()
     return redirect('viewcart')    
 
+
+#===================================== Address ============================================
+
+
 def address(request):
     if request.method =="POST":
         form = CustomerForm(request.POST)
         if form.is_valid():
-            user=request.user
+            user=request.user                   # user variable store the current user i.e nishant1
             name = form.cleaned_data['name']
             address = form.cleaned_data['address']
             city = form.cleaned_data['city']
@@ -202,7 +213,7 @@ def address(request):
             
     else:           
         form = CustomerForm()
-        address = Customer.objects.filter(user=request.user) 
+    address = Customer.objects.filter(user=request.user) 
     return render(request,'core/address.html',{'form':form,'address':address})  
 
 
@@ -212,26 +223,74 @@ def deleteaddress(request,id):
         de.delete()
     return redirect('address')
 
+
+#===================================== Checkout ============================================
+
 def checkout(request):
 
-      # Will fecth the domain site is currently hosted on.
-
-    cart_item = Cart.objects.filter(user=request.user)
+    cart_item = Cart.objects.filter(user=request.user)      # cart_items will fetch product of current user, and show product available in the cart of the current user.
     total = 0
     delivery_charge = 2000
     for item in cart_item:
         item.product.price_and_quantity_total = item.product.selling_price * item.quantity
         total += item.product.price_and_quantity_total
     final_price = delivery_charge + total
+
     address = Customer.objects.filter(user=request.user)
     return render(request,'core/checkout.html',{'cart_item':cart_item,'total':total,'final_price':final_price,'address':address})
+
+#===================================== Payment ============================================
+
+# def payment(request):
+
+#     if request.method=="POST":
+#         selected_address_id = request.POST.get('selected_address') 
+
+#     cart_item = Cart.objects.filter(user=request.user)            # cart_items will fetch product of current user, and show product available in the cart of the current user.
+#     total = 0
+#     delivery_charge = 2000
+#     for item in cart_item:
+#         item.product.price_and_quantity_total = item.product.selling_price * item.quantity
+#         total += item.product.price_and_quantity_total
+#     final_price = delivery_charge + total
+
+#     address = Customer.objects.filter(user=request.user)
+
+# #================================ Paypal code ===============================================
+
+#     host = request.get_host()    # Will fecth the domain site is currently hosted on.
+
+#     paypal_checkout = {
+#         'business':settings.PAYPAL_RECEIVER_EMAIL,
+#         'amount':final_price,
+#         'item_name':'Product',
+#         'invoice':uuid.uuid4(),
+#         'currency_code':'USD',
+#         'notify_url':f"http://{host}{reverse('paypal-ipn')}",
+#         'return_url':f"http://{host}{reverse('paymentsuccess',args=[selected_address_id])}",
+#         'cancel_url':f"http://{host}{reverse('paymentfailed')}",
+#     }
+    
+#     paypal_payment = PayPalPaymentsForm(initial=paypal_checkout)
+
+# #======================================================================================
+
+
+#     return render(request,'core/payment.html',{'cart_item':cart_item,'total':total,'final_price':final_price,'address':address,'paypal_payment':paypal_payment})
+
 
 
 
 def payment(request):
-    if request.method=="POST":
-        selected_address_id = request.POST.get('selected_address') 
-    host = request.get_host()
+    if request.method == "POST":
+        selected_address_id = request.POST.get('selected_address')
+        if selected_address_id is None:
+            return redirect('checkout')
+        request.session['selected_address_id'] = selected_address_id
+        return redirect('payment')
+
+    selected_address_id = request.session.get('selected_address_id')
+
     cart_item = Cart.objects.filter(user=request.user)
     total = 0
     delivery_charge = 2000
@@ -239,27 +298,30 @@ def payment(request):
         item.product.price_and_quantity_total = item.product.selling_price * item.quantity
         total += item.product.price_and_quantity_total
     final_price = delivery_charge + total
+
     address = Customer.objects.filter(user=request.user)
 
-#================================Paypal code===============================================
-    
+    host = request.get_host()
+
     paypal_checkout = {
-        'business':settings.PAYPAL_RECEIVER_EMAIL,
-        'amount':final_price,
-        'item_name':'Product',
-        'invoice':uuid.uuid4(),
-        'currency_code':'USD',
-        'notify_url':f"http://{host}{reverse('paypal-ipn')}",
-        'return_url':f"http://{host}{reverse('paymentsuccess',args=[selected_address_id])}",
-        'cancel_url':f"http://{host}{reverse('paymentfailed')}",
+        'business': settings.PAYPAL_RECEIVER_EMAIL,
+        'amount': final_price,
+        'item_name': 'Product',
+        'invoice': uuid.uuid4(),
+        'currency_code': 'USD',
+        'notify_url': f"http://{host}{reverse('paypal-ipn')}",
+        'return_url': f"http://{host}{reverse('paymentsuccess', args=[selected_address_id])}",
+        'cancel_url': f"http://{host}{reverse('paymentfailed')}",
     }
-    
+
     paypal_payment = PayPalPaymentsForm(initial=paypal_checkout)
-    return render(request,'core/payment.html',{'cart_item':cart_item,'total':total,'final_price':final_price,'address':address,'paypal_payment':paypal_payment})
 
+    return render(request, 'core/payment.html', {'cart_item': cart_item, 'total': total, 'final_price': final_price, 'address': address, 'paypal_payment': paypal_payment})
 
-def payment_success(request,selected_address_id):
-    user =request.user
+#===================================== Payment Success ============================================
+
+def payment_success(request,selected_address_id):                    # we have fetch this id from return_url': f"http://{host}{reverse('paymentsuccess', args=[selected_address_id])}
+    user =request.user                                                  # This id contain address detail of particular customer
     customer_data = Customer.objects.get(pk=selected_address_id)
     cart = Cart.objects.filter(user=user)
     for c in cart:
@@ -267,10 +329,70 @@ def payment_success(request,selected_address_id):
         c.delete()
     return render(request,'core/payment_successful.html')
 
+
+#===================================== Payment Failed ============================================
+
 def payment_failed(request):
     return render(request,'core/payment_failed.html')    
+
+
+#===================================== Order ====================================================
 
 def order(request):
     ordr =Order.objects.filter(user=request.user)
     return render(request,'core/order.html',{'ordr':ordr})
     
+
+#========================================== Buy Now ================================================    
+
+def buynow(request,id):
+    product = Products.objects.get(pk=id)     # cart_items will fetch product of current user, and show product available in the cart of the current user.
+    delhivery_charge =2000
+    final_price= delhivery_charge + product.selling_price
+    
+    address = Customer.objects.filter(user=request.user)
+
+    return render(request, 'core/buynow.html', {'final_price':final_price,'address':address,'product':product})
+
+
+def buynow_payment(request,id):
+
+    if request.method == 'POST':
+        selected_address_id = request.POST.get('buynow_selected_address')
+
+    product = Products.objects.get(pk=id)     # cart_items will fetch product of current user, and show product available in the cart of the current user.
+    delhivery_charge =2000
+    final_price= delhivery_charge + product.selling_price
+    
+    address = Customer.objects.filter(user=request.user)
+    #================= Paypal Code ======================================
+
+    host = request.get_host()   # Will fecth the domain site is currently hosted on.
+
+    paypal_checkout = {
+        'business': settings.PAYPAL_RECEIVER_EMAIL,
+        'amount': final_price,
+        'item_name': 'Product',
+        'invoice': uuid.uuid4(),
+        'currency_code': 'USD',
+        'notify_url': f"http://{host}{reverse('paypal-ipn')}",
+        'return_url': f"http://{host}{reverse('buynowpaymentsuccess', args=[selected_address_id,id])}",
+        'cancel_url': f"http://{host}{reverse('paymentfailed')}",
+    }
+
+    paypal_payment = PayPalPaymentsForm(initial=paypal_checkout)
+
+    #========================================================================
+
+    return render(request, 'core/payment.html', {'final_price':final_price,'address':address,'product':product,'paypal_payment':paypal_payment})
+
+def buynow_payment_success(request,selected_address_id,id):
+    print('payment sucess',selected_address_id)   # we have fetch this id from return_url': f"http://{host}{reverse('paymentsuccess', args=[selected_address_id])}
+                                                  # This id contain address detail of particular customer
+    user =request.user
+    customer_data = Customer.objects.get(pk=selected_address_id,)
+    
+    product = Products.objects.get(pk=id)
+    Order(user=user,customer=customer_data,product=product,quantity=1).save()
+   
+    return render(request,'core/buynow_payment_success.html')

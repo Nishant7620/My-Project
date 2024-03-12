@@ -28,7 +28,7 @@
                 
                  <div class="text-center">
                       <h5 class="font-weight-bold text-dark "><i class="fa-solid fa-indian-rupee-sign"></i> <small class="fw-light rupee"> {{b.selling_price}}</small> <small class="text-danger">(% off)</small></h5> 
-                      
+                      <a href="{% url "buynow" b.id %}" class="btn btn-success my-2">Buy Now</a>
                   </div>
               </div>
           </div>

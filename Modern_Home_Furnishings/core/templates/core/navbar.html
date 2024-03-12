@@ -45,19 +45,6 @@
               </form>
             <ul class="navbar-nav ml-auto mb-2 mb-lg-0" style="padding: 10px; margin-right:40px">
               <li class="nav-item">
-                
-                {% comment %} <a class="nav-link" href="#">Products</a> {% endcomment %}
-                {% comment %} <div class="dropdown">
-                  <button class="btn btn-link dropdown-toggle product_btn" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    User
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="{% url "profile" %}" style="color: black;">Profile</a>
-                    <a class="dropdown-item" href="" style="color: black;" >Orders</a>
-                    <a class="dropdown-item" href="{% url "changepassword" %}"style="color: black;">Change Password</a>
-                    <a class="dropdown-item" href="{% url "logout" %}"style="color: black;">Logout</a>
-                  </div>
-                </div> {% endcomment %}
                 {% if request.user.is_authenticated %}
                 <div class="dropdown">
                   <button class="btn btn-link dropdown-toggle product_btn" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -65,15 +52,11 @@
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="{% url "profile" %}" style="color: black;">Profile</a>
-                    <a class="dropdown-item" href="" style="color: black;" >Orders</a>
+                    <a class="dropdown-item" href="{% url "order" %}" style="color: black;" >Orders</a>
                     <a class="dropdown-item" href="{% url "changepassword" %}"style="color: black;">Change Password</a>
                     <a class="dropdown-item" href="{% url "logout" %}"style="color: black;">Logout</a>
                   </div>
                 </div>
-
-                {% comment %} <li class="nav-item">
-                  <a class="nav-link" href="{% url "profile" %}">Welcome {{user.first_name}}</a>
-                </li> {% endcomment %}
                 <li class="nav-item">
                   <a class="nav-link" href="{% url "viewcart" %}"><i class="fa-solid fa-cart-shopping"></i></a>
                 </li>
@@ -85,9 +68,6 @@
                   <a class="nav-link" href="{% url "registration" %}">Registration</a>
                 </li>
               </li>
-              {% comment %} <li class="nav-item">
-                <a class="nav-link" href="{% url "x" %}">About</a>
-              </li> {% endcomment %}
               <li class="nav-item">
                 <a class="nav-link" href={% url "login" %}>Login</a>
               </li>

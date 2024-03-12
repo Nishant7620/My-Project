@@ -212,10 +212,10 @@
             <div class="pricing">
                 <div class="row">
                     <div class="col-9">
-                        <span id="name">{{o.pet.name}}</span>  
+                        <span id="name">{{o.product.name}}</span>  
                     </div>
                     <div class="col-3">
-                        <span id="price">₹ {{o.pet.discounted_price}}</span>
+                        <span id="price">₹ {{o.product.selling_price}}</span>
                     </div>
                 </div>
                 <div class="row">
@@ -230,7 +230,7 @@
             <div class="total">
                 <div class="row">
                     <div class="col-9"></div>
-                    <div class="col-3"><big>&pound;262.99</big></div>
+                    <div class="col-3"><big>&pound;{{o.product.selling_price|add:2000}}</big></div>
                 </div>
             </div>
             <div class="tracking">
