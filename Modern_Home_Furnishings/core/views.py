@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.views import View
-from .models import Customer,Products,Contact,Cart
+from .models import Customer,Products,Contact,Cart,Order
 from .forms import CustomerRegistrationForm,AuthenticateForm,UserProfileForm,AdminProfileForm,ChangePasswordForm,ContactForm,CustomerForm
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 from django.contrib import messages
@@ -195,8 +195,9 @@ def address(request):
             name = form.cleaned_data['name']
             address = form.cleaned_data['address']
             city = form.cleaned_data['city']
+            state = form.cleaned_data['state']
             pincode = form.cleaned_data['pincode']
-            Customer(user=user,name=name,address=address,city=city,pincode=pincode).save()
+            Customer(user=user,name=name,address=address,city=city,state=state,pincode=pincode).save()
             return redirect('address')
             
     else:           
@@ -213,7 +214,7 @@ def deleteaddress(request,id):
 
 def checkout(request):
 
-    host =request.get_host()   # Will fecth the domain site is currently hosted on.
+      # Will fecth the domain site is currently hosted on.
 
     cart_item = Cart.objects.filter(user=request.user)
     total = 0
@@ -222,10 +223,26 @@ def checkout(request):
         item.product.price_and_quantity_total = item.product.selling_price * item.quantity
         total += item.product.price_and_quantity_total
     final_price = delivery_charge + total
-    
+    address = Customer.objects.filter(user=request.user)
+    return render(request,'core/checkout.html',{'cart_item':cart_item,'total':total,'final_price':final_price,'address':address})
+
+
+
+def payment(request):
+    if request.method=="POST":
+        selected_address_id = request.POST.get('selected_address') 
+    host = request.get_host()
+    cart_item = Cart.objects.filter(user=request.user)
+    total = 0
+    delivery_charge = 2000
+    for item in cart_item:
+        item.product.price_and_quantity_total = item.product.selling_price * item.quantity
+        total += item.product.price_and_quantity_total
+    final_price = delivery_charge + total
     address = Customer.objects.filter(user=request.user)
 
-#===================Paypal code===========================================
+#================================Paypal code===============================================
+    
     paypal_checkout = {
         'business':settings.PAYPAL_RECEIVER_EMAIL,
         'amount':final_price,
@@ -233,19 +250,27 @@ def checkout(request):
         'invoice':uuid.uuid4(),
         'currency_code':'USD',
         'notify_url':f"http://{host}{reverse('paypal-ipn')}",
-        'return_url':f"http://{host}{reverse('paymentsuccess')}",
+        'return_url':f"http://{host}{reverse('paymentsuccess',args=[selected_address_id])}",
         'cancel_url':f"http://{host}{reverse('paymentfailed')}",
     }
-
+    
     paypal_payment = PayPalPaymentsForm(initial=paypal_checkout)
+    return render(request,'core/payment.html',{'cart_item':cart_item,'total':total,'final_price':final_price,'address':address,'paypal_payment':paypal_payment})
 
-#=================================================================================
 
-    return render(request,'core/checkout.html',{'cart_item':cart_item,'total':total,'final_price':final_price,'address':address,'paypal':paypal_payment})
-
-def payment_success(request):
+def payment_success(request,selected_address_id):
+    user =request.user
+    customer_data = Customer.objects.get(pk=selected_address_id)
+    cart = Cart.objects.filter(user=user)
+    for c in cart:
+        Order(user=user,customer = customer_data,product=c.product,quantity=c.quantity).save()
+        c.delete()
     return render(request,'core/payment_successful.html')
 
 def payment_failed(request):
     return render(request,'core/payment_failed.html')    
 
+def order(request):
+    ordr =Order.objects.filter(user=request.user)
+    return render(request,'core/order.html',{'ordr':ordr})
+    

@@ -25,8 +25,11 @@ urlpatterns = [
     path('address/',views.address,name='address'),
     path('deleteaddress/<int:id>/',views.deleteaddress,name='deleteaddress'),
     path('checkout/',views.checkout,name='checkout'),
-    path('payment_success/',views.payment_success,name='paymentsuccess'),
+    path('payment/',views.payment,name='payment'),
+    path('payment_success/<int:selected_address_id>',views.payment_success,name='paymentsuccess'),
     path('payment_failed/',views.payment_failed,name='paymentfailed'),
+    path('order/',views.order,name='order'),
+   
     
 ]
 
