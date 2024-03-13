@@ -11,6 +11,7 @@ urlpatterns = [
     path('',views.Home.as_view(),name='home'),
     path('sofa_categories',views.Sofas.as_view(),name='sofacategories'),
     path('bed_categories',views.Beds.as_view(),name='bedcategories'),
+    path('chair_categories',views.Chairs.as_view(),name='chaircategories'),
     path('product_details/<int:id>/',views.ProductDetail.as_view(),name='productdetails'),
     path('registration',views.CustomerRegistration,name='registration'),
     path('login',views.Login,name='login'),

@@ -49,6 +49,7 @@ class Products(models.Model):
     CATAGORY_CHOICES = [
         ('SOFA','Sofa'),
         ('BED','Bed'),
+        ('CHAIR','Chair'),
     ]
 
     name = models.CharField(max_length=100)
@@ -56,6 +57,8 @@ class Products(models.Model):
     small_description = models.TextField()
     description = models.TextField()
     selling_price = models.IntegerField()
+    discounted_price = models.IntegerField(default=0)
+    percentage = models.IntegerField(default=0)
     price_and_quantity_total = models.IntegerField(default=0)
     product_image = models.ImageField(upload_to = 'product_images',default='none')   # As we are using image field we have to intall 'pillow'. And we have to Define MEDIA_URL in settings.py file so that all folder should save in media directory
 
@@ -63,8 +66,8 @@ class Products(models.Model):
         return str(self.id)
 
 class Cart(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    product = models.ForeignKey(Products,on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)            #Each cart instance is associated with a single user. 
+    product = models.ForeignKey(Products,on_delete=models.CASCADE)       #Each cart instance is associated with a single Product product. Similarly, the on_delete=models.CASCADE argument means that if the referenced product object is deleted, the corresponding Cart instances associated with that product will be deleted.
     quantity = models.PositiveIntegerField(default=1)           # Quantity cannot be negative so we have used PositiveIntegerField
 
     def __str__(self):

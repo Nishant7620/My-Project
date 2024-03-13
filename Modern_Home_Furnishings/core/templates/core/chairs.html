@@ -1,0 +1,27 @@
+{% extends "core/base.html" %}
+{% block home %}
+{% load static %}
+
+  <div class="container">              <!-- we have created new container class-->
+    <div class="row">                           <!-- we have created row class-->
+        {% for c in chair_category %}
+        <div class="col-sm-4 ">
+          <a href="{% url "productdetails" c.id %}" style="text-decoration: none; ">        
+            <div class="card sofa_categories_card sofa_card " style="width: 20rem; height:23rem;">
+                <img class="card-img-top " src="{{c.product_image.url}}" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">{{c.name}}</h5>
+                   <div class="text-center">
+                        <h5 class="font-weight-bold text-dark "><i class="fa-solid fa-indian-rupee-sign"></i>{{pd.discounted_price}} <small class="fw-light rupee"> {{c.selling_price}}</small> <small class="text-danger">({{percentage}}% off)</small></h5>  
+                    </div>
+                </div>
+            </div>
+          </a>
+        </div>       
+        {% endfor %}
+    </div>
+</div>
+{% endblock home %}
+
+        
+      

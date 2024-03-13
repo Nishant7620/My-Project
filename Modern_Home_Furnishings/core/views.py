@@ -58,13 +58,27 @@ class Beds(View):
         return render(request,'core/beds.html',{'Bed_category':Bed_category})
 
 
+
+class Chairs(View):
+    def get(self,request):
+        chair_category = Products.objects.filter(category = 'CHAIR')
+        return render(request,'core/chairs.html',{'chair_category':chair_category})
 #----------- class base view of Product Details--------------------------------
 
 
 class ProductDetail(View):
     def get(self,request,id):
-        product_detail = Products.objects.get(pk=id)
-        return render(request,'core/product_details.html',{'pd':product_detail})
+        pd = Products.objects.get(pk=id)
+
+        #------------- code for calculate percentage -------------------------------
+        if pd.discounted_price !=0:
+            print(pd.discounted_price)
+            percentage = int(((pd.selling_price-pd.discounted_price)/pd.selling_price)*100)
+
+        else:
+            percentage = 0
+         #----------------- code end for calculate percentage ------------------------------       
+        return render(request,'core/product_details.html',{'pd':pd,'percentage':percentage})
 
 
 #-------------------------------Registration-------------------------------------
