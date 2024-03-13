@@ -360,17 +360,21 @@ def order(request):
 #========================================== Buy Now ================================================    
 
 def buynow(request,id):
-    product = Products.objects.get(pk=id)     # cart_items will fetch product of current user, and show product available in the cart of the current user.
-    delhivery_charge =2000
-    final_price= delhivery_charge + product.selling_price
+    if request.user.is_authenticated:                # Password Change Form
+        if request.method =="POST":  
+            product = Products.objects.get(pk=id)     # cart_items will fetch product of current user, and show product available in the cart of the current user.
+            delhivery_charge =2000
+            final_price= delhivery_charge + product.selling_price
     
-    address = Customer.objects.filter(user=request.user)
-
+        address = Customer.objects.filter(user=request.user)
+    else:
+        return redirect('login')
+    
     return render(request, 'core/buynow.html', {'final_price':final_price,'address':address,'product':product})
 
 
 def buynow_payment(request,id):
-
+    
     if request.method == 'POST':
         selected_address_id = request.POST.get('buynow_selected_address')
 
