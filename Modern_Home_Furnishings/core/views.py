@@ -20,7 +20,7 @@ from django.urls import reverse
 #-----------------class base view of Home---------------------------
 
 class Home(View):
-    def get(self,request,):
+    def get(self,request):
         bed_ids = [15,16,17]
         bed = Products.objects.filter(category = "BED",id__in =bed_ids)
         return render(request,'core/home.html',{'bed':bed})
@@ -72,7 +72,6 @@ class ProductDetail(View):
 
         #------------- code for calculate percentage -------------------------------
         if pd.discounted_price !=0:
-            print(pd.discounted_price)
             percentage = int(((pd.selling_price-pd.discounted_price)/pd.selling_price)*100)
 
         else:
@@ -255,57 +254,12 @@ def checkout(request):
 
 #===================================== Payment ============================================
 
-# def payment(request):
-
-#     if request.method=="POST":
-#         selected_address_id = request.POST.get('selected_address') 
-
-#     cart_item = Cart.objects.filter(user=request.user)            # cart_items will fetch product of current user, and show product available in the cart of the current user.
-#     total = 0
-#     delivery_charge = 2000
-#     for item in cart_item:
-#         item.product.price_and_quantity_total = item.product.selling_price * item.quantity
-#         total += item.product.price_and_quantity_total
-#     final_price = delivery_charge + total
-
-#     address = Customer.objects.filter(user=request.user)
-
-# #================================ Paypal code ===============================================
-
-#     host = request.get_host()    # Will fecth the domain site is currently hosted on.
-
-#     paypal_checkout = {
-#         'business':settings.PAYPAL_RECEIVER_EMAIL,
-#         'amount':final_price,
-#         'item_name':'Product',
-#         'invoice':uuid.uuid4(),
-#         'currency_code':'USD',
-#         'notify_url':f"http://{host}{reverse('paypal-ipn')}",
-#         'return_url':f"http://{host}{reverse('paymentsuccess',args=[selected_address_id])}",
-#         'cancel_url':f"http://{host}{reverse('paymentfailed')}",
-#     }
-    
-#     paypal_payment = PayPalPaymentsForm(initial=paypal_checkout)
-
-# #======================================================================================
-
-
-#     return render(request,'core/payment.html',{'cart_item':cart_item,'total':total,'final_price':final_price,'address':address,'paypal_payment':paypal_payment})
-
-
-
-
 def payment(request):
-    if request.method == "POST":
-        selected_address_id = request.POST.get('selected_address')
-        if selected_address_id is None:
-            return redirect('checkout')
-        request.session['selected_address_id'] = selected_address_id
-        return redirect('payment')
 
-    selected_address_id = request.session.get('selected_address_id')
+    if request.method=="POST":
+        selected_address_id = request.POST.get('selected_address') 
 
-    cart_item = Cart.objects.filter(user=request.user)
+    cart_item = Cart.objects.filter(user=request.user)            # cart_items will fetch product of current user, and show product available in the cart of the current user.
     total = 0
     delivery_charge = 2000
     for item in cart_item:
@@ -315,22 +269,67 @@ def payment(request):
 
     address = Customer.objects.filter(user=request.user)
 
-    host = request.get_host()
+#================================ Paypal code ===============================================
+
+    host = request.get_host()    # Will fecth the domain site is currently hosted on.
 
     paypal_checkout = {
-        'business': settings.PAYPAL_RECEIVER_EMAIL,
-        'amount': final_price,
-        'item_name': 'Product',
-        'invoice': uuid.uuid4(),
-        'currency_code': 'USD',
-        'notify_url': f"http://{host}{reverse('paypal-ipn')}",
-        'return_url': f"http://{host}{reverse('paymentsuccess', args=[selected_address_id])}",
-        'cancel_url': f"http://{host}{reverse('paymentfailed')}",
+        'business':settings.PAYPAL_RECEIVER_EMAIL,
+        'amount':final_price,
+        'item_name':'Product',
+        'invoice':uuid.uuid4(),
+        'currency_code':'USD',
+        'notify_url':f"http://{host}{reverse('paypal-ipn')}",
+        'return_url':f"http://{host}{reverse('paymentsuccess',args=[selected_address_id])}",
+        'cancel_url':f"http://{host}{reverse('paymentfailed')}",
     }
-
+    
     paypal_payment = PayPalPaymentsForm(initial=paypal_checkout)
 
-    return render(request, 'core/payment.html', {'cart_item': cart_item, 'total': total, 'final_price': final_price, 'address': address, 'paypal_payment': paypal_payment})
+#======================================================================================
+
+
+    return render(request,'core/payment.html',{'cart_item':cart_item,'total':total,'final_price':final_price,'address':address,'paypal_payment':paypal_payment})
+
+
+
+
+# def payment(request):
+#     if request.method == "POST":
+#         selected_address_id = request.POST.get('selected_address')
+#         if selected_address_id is None:
+#             return redirect('checkout')
+#         request.session['selected_address_id'] = selected_address_id
+#         return redirect('payment')
+
+#     selected_address_id = request.session.get('selected_address_id')
+
+#     cart_item = Cart.objects.filter(user=request.user)
+#     total = 0
+#     delivery_charge = 2000
+#     for item in cart_item:
+#         item.product.price_and_quantity_total = item.product.selling_price * item.quantity
+#         total += item.product.price_and_quantity_total
+#     final_price = delivery_charge + total
+
+#     address = Customer.objects.filter(user=request.user)
+
+#     host = request.get_host()
+
+#     paypal_checkout = {
+#         'business': settings.PAYPAL_RECEIVER_EMAIL,
+#         'amount': final_price,
+#         'item_name': 'Product',
+#         'invoice': uuid.uuid4(),
+#         'currency_code': 'USD',
+#         'notify_url': f"http://{host}{reverse('paypal-ipn')}",
+#         'return_url': f"http://{host}{reverse('paymentsuccess', args=[selected_address_id])}",
+#         'cancel_url': f"http://{host}{reverse('paymentfailed')}",
+#     }
+
+#     paypal_payment = PayPalPaymentsForm(initial=paypal_checkout)
+
+#     return render(request, 'core/payment.html', {'cart_item': cart_item, 'total': total, 'final_price': final_price, 'address': address, 'paypal_payment': paypal_payment})
 
 #===================================== Payment Success ============================================
 
@@ -361,10 +360,10 @@ def order(request):
 
 def buynow(request,id):
     if request.user.is_authenticated:                # Password Change Form
-        if request.method =="POST":  
-            product = Products.objects.get(pk=id)     # cart_items will fetch product of current user, and show product available in the cart of the current user.
-            delhivery_charge =2000
-            final_price= delhivery_charge + product.selling_price
+          
+        product = Products.objects.get(pk=id)     # cart_items will fetch product of current user, and show product available in the cart of the current user.
+        delhivery_charge =2000
+        final_price= delhivery_charge + product.selling_price
     
         address = Customer.objects.filter(user=request.user)
     else:
