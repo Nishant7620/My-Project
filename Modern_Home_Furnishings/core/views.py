@@ -292,45 +292,6 @@ def payment(request):
     return render(request,'core/payment.html',{'cart_item':cart_item,'total':total,'final_price':final_price,'address':address,'paypal_payment':paypal_payment})
 
 
-
-
-# def payment(request):
-#     if request.method == "POST":
-#         selected_address_id = request.POST.get('selected_address')
-#         if selected_address_id is None:
-#             return redirect('checkout')
-#         request.session['selected_address_id'] = selected_address_id
-#         return redirect('payment')
-
-#     selected_address_id = request.session.get('selected_address_id')
-
-#     cart_item = Cart.objects.filter(user=request.user)
-#     total = 0
-#     delivery_charge = 2000
-#     for item in cart_item:
-#         item.product.price_and_quantity_total = item.product.selling_price * item.quantity
-#         total += item.product.price_and_quantity_total
-#     final_price = delivery_charge + total
-
-#     address = Customer.objects.filter(user=request.user)
-
-#     host = request.get_host()
-
-#     paypal_checkout = {
-#         'business': settings.PAYPAL_RECEIVER_EMAIL,
-#         'amount': final_price,
-#         'item_name': 'Product',
-#         'invoice': uuid.uuid4(),
-#         'currency_code': 'USD',
-#         'notify_url': f"http://{host}{reverse('paypal-ipn')}",
-#         'return_url': f"http://{host}{reverse('paymentsuccess', args=[selected_address_id])}",
-#         'cancel_url': f"http://{host}{reverse('paymentfailed')}",
-#     }
-
-#     paypal_payment = PayPalPaymentsForm(initial=paypal_checkout)
-
-#     return render(request, 'core/payment.html', {'cart_item': cart_item, 'total': total, 'final_price': final_price, 'address': address, 'paypal_payment': paypal_payment})
-
 #===================================== Payment Success ============================================
 
 def payment_success(request,selected_address_id):                    # we have fetch this id from return_url': f"http://{host}{reverse('paymentsuccess', args=[selected_address_id])}
@@ -360,7 +321,6 @@ def order(request):
 
 def buynow(request,id):
     if request.user.is_authenticated:                # Password Change Form
-          
         product = Products.objects.get(pk=id)     # cart_items will fetch product of current user, and show product available in the cart of the current user.
         delhivery_charge =2000
         final_price= delhivery_charge + product.selling_price

@@ -1,7 +1,7 @@
 {% extends "core/base.html" %}
 {% block home %}
 {% load static %}
- <div class="container " style="margin-top: 100px;">                         <!-- we have created new container class-->
+ <div class="container " style="margin-top: 100px;">                 <!-- we have created new container class-->
   <div class="row">                           <!-- we have created row class-->
       {% for bc in Bed_category %}
       <div class="col-sm-4 ">
@@ -11,7 +11,7 @@
               <div class="card-body">
                 <h5 class="card-title">{{bc.name}}</h5>
                  <div class="text-center">
-                      <h5 class="font-weight-bold text-dark "><i class="fa-solid fa-indian-rupee-sign"></i>{{bc.discounted_price}} <small class="fw-light rupee"> {{bc.selling_price}}</small> <small class="text-danger">(%{{bc.percentage}} off)</small></h5> 
+                      <h5 class="font-weight-bold text-dark "><i class="fa-solid fa-indian-rupee-sign"></i>{{bc.discounted_price}} <small class="fw-light rupee"> <s>{{bc.selling_price}}</s></small> <small class="text-danger">(%{{bc.percentage}} off)</small></h5> 
                       
                   </div>
               </div>

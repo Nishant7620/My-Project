@@ -12,7 +12,7 @@
                 <div class="card-body">
                   <h5 class="card-title">{{dc.name}}</h5>
                    <div class="text-center">
-                        <h5 class="font-weight-bold text-dark "><i class="fa-solid fa-indian-rupee-sign"></i> <small class="fw-light rupee"> {{dc.selling_price}}</small> <small class="text-danger">(% off)</small></h5>  
+                        <h5 class="font-weight-bold text-dark "><i class="fa-solid fa-indian-rupee-sign"></i> {{dc.discounted_price}}<small class="fw-light rupee"> <s>{{dc.selling_price}}</s></small> <small class="text-danger">(% {{dc.percentage}}off)</small></h5>  
                     </div>
                 </div>
             </div>

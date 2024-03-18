@@ -12,7 +12,7 @@
                 <h1 class="jumbotron-heading text-center text-danger">{{pd.name}}</h1>
                 <p class="lead text-center">{{pd.small_description}}</p>
                     <div class="text-center">
-                        <h4 class="font-weight-bold"><i class="fa-solid fa-indian-rupee-sign"></i>{{pd.discounted_price}} <small class="fw-light rupee">{{pd.selling_price}}</small> <small class="text-danger">({{percentage}}% off)</small></h4> 
+                        <h4 class="font-weight-bold"><i class="fa-solid fa-indian-rupee-sign"></i>{{pd.discounted_price}} <small class="fw-light rupee"><s>{{pd.selling_price}}</s></small> <small class="text-danger">({{percentage}}% off)</small></h4> 
                         <a href="{% url "addtocart" pd.id %}" class="btn btn-info my-2 mr-2">Add to cart</a>
                         <a href="{% url "buynow" pd.id %}" class="btn btn-success my-2">Buy Now</a>
                     </div>
