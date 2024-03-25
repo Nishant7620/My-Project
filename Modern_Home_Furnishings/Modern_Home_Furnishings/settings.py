@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-)$@5w6c#4(&5fy&b@d_@w+3$43^)0a%@@=s__r4dinrdks&&ec
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -116,10 +116,13 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
-
+import os
 STATIC_URL = 'static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR/'media'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
+MEDIA_URLS ='/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 PAYPAL_RECEIVER_EMAIL ='sb-x7rhw29129350@business.example.com'   # where cash is paid into i.e Merchant receiver mail
 PAYPAL_TEST = True

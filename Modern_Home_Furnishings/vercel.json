@@ -1,0 +1,13 @@
+{
+    "builds": [{
+        "src": "Modern_Home_Furnishings/wsgi.py",
+        "use": "@vercel/python",
+        "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
+    }],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "Modern_Home_Furnishings/wsgi.py"
+        }
+    ]
+}
